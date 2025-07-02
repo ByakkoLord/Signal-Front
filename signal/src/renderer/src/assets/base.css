@@ -70,8 +70,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 30vw;
+  width: 25vw;
   padding: 10px;
   border-radius: 15px;
-  background: linear-gradient(135deg, #941A1A, #ef5c5c);
+  
 }

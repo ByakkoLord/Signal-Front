@@ -1,6 +1,19 @@
-export default function Tasks() {
+import React, { useState, useEffect } from 'react';
+
+export default function Tasks( { type } ) {
+  const [color, setColor] = useState('')
+  console.log(type + " tasks")
+  useEffect(() => {
+     if ( type === "first" ) {
+    console.log(type)
+    setColor('linear-gradient(135deg, #941A1A, #ef5c5c)')
+  } else if ( type === "second" ) {
+    console.log(type)
+    setColor('linear-gradient(135deg, #7D5175, #E392D4)')
+  }
+  }, [type])
   return (
-    <div className="tasks">
+    <div className="tasks" style={{background: color}}>
       <h1
         style={{
           color: 'white',
@@ -10,6 +23,7 @@ export default function Tasks() {
           alignSelf: 'flex-start',
           paddingBottom: '10px',
           fontFamily: 'Poppins-regular',
+          
         }}
       >
         Coleta de Banco
