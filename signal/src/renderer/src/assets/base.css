@@ -65,6 +65,7 @@
 }
 
 .tasks {
+
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
@@ -74,4 +75,9 @@
   padding: 10px;
   border-radius: 15px;
   
+  
+}
+
+.draggable-box {
+  position: absolute;
 }
