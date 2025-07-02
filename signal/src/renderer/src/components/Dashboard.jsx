@@ -5,6 +5,8 @@ import PriorityBoard from './dashboard/PriorityBoard'
 import SecondaryBoard from './dashboard/SecondaryBoard'
 import LastBoard from './dashboard/LastBoard'
 
+import plus from '../assets/plus.png'
+
 export default function Dashboard() {
   const [openTaskCreator, setOpenTaskCreator] = React.useState(false)
 
@@ -17,18 +19,25 @@ export default function Dashboard() {
       <LastBoard type="third" />
       <button
         style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
           position: 'fixed',
           bottom: '20px',
           right: '20px',
+          border: 'none',
+          width: '50px',
+          height: '50px',
           marginTop: '20px',
           padding: '10px',
-          borderRadius: '5px',
+          borderRadius: '50%',
           backgroundColor: '#4CAF50',
-          color: 'white'
+          color: 'white',
+          cursor: 'pointer',
         }}
         onClick={() => setOpenTaskCreator(!openTaskCreator)}
       >
-        Toggle Task Creator
+        <img width={36} height={37} src={plus} alt="" />
       </button>
       {openTaskCreator && <TaskCreator />}
     </div>
