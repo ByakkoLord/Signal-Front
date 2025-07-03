@@ -1,81 +1,89 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { AppContext } from '../../../contexts/ClientContext';
 
 export default function Tasks({ type, task }) {
+  
   if (!task) return null;
 
+  const { setIsDraggingContext } = useContext(AppContext);
   const boxRef = useRef(null);
   const offset = useRef({ x: 0, y: 0 });
   const [initialPos, setInitialPos] = useState({ x: 100, y: 100 });
   const [color, setColor] = useState('');
 
+
+  let isDragging = false
   useEffect(() => {
-    if (type === 'first') {
-      setColor('linear-gradient(135deg, #941A1A, #ef5c5c)');
-    } else if (type === 'second') {
-      setColor('linear-gradient(135deg, #7D5175, #E392D4)');
-    }
+  const box = boxRef.current;
+  if (!box) return;
+  
+  const rect = box.getBoundingClientRect();
+  setInitialPos({ x: rect.left, y: rect.top });
+}, []); // executa só uma vez
 
-    const box = boxRef.current;
-    if (!box) return;
+  useEffect(() => {
+  if (type === 'first') {
+    setColor('linear-gradient(135deg, #941A1A, #ef5c5c)');
+  } else if (type === 'second') {
+    setColor('linear-gradient(135deg, #7D5175, #E392D4)');
+  }
 
-    // Posição inicial salva
-    const rect = box.getBoundingClientRect();
-    setInitialPos({ x: rect.left, y: rect.top });
+  const box = boxRef.current;
+  if (!box) return;
 
-    let isDragging = false;
-
-    const onMouseDown = (e) => {
-      isDragging = true;
-      box.classList.add('draggable-box');
-      box.style.transition = 'none'; // sem transição durante arraste
-      offset.current = {
-        x: e.clientX - box.getBoundingClientRect().left,
-        y: e.clientY - box.getBoundingClientRect().top,
-      };
-      document.addEventListener('mousemove', onMouseMove);
-      document.addEventListener('mouseup', onMouseUp);
+  const onMouseDown = (e) => {
+    isDragging = true;
+    setIsDraggingContext(true);
+    box.classList.add('draggable-box');
+    box.style.transition = 'none';
+    offset.current = {
+      x: e.clientX - box.getBoundingClientRect().left,
+      y: e.clientY - box.getBoundingClientRect().top,
     };
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+  };
 
-    const onMouseMove = (e) => {
-      if (!isDragging) return;
-        box.style.left = `${e.clientX}px`;
-      box.style.top = `${e.clientY}px`;
-    };
+  const onMouseMove = (e) => {
+    if (!isDragging) return;
+    box.style.left = `${e.clientX - offset.current.x}px`;
+    box.style.top = `${e.clientY - offset.current.y}px`;
+  };
 
-    const onMouseUp = () => {
-      isDragging = false;
-      box.classList.remove('draggable-box');
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
+  const onMouseUp = () => {
+    isDragging = false;
+    setIsDraggingContext(false);
+    box.classList.remove('draggable-box');
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
 
-      box.style.transition = 'left 0.3s ease, top 0.3s ease'; // ativa transição
-      box.style.left = `${initialPos.x}px`;
-      box.style.top = `${initialPos.y}px`;
-      setInitialPos({ x: initialPos.x, y: initialPos.y });
-      console.log(initialPos); // atualiza posição inicial
-      console.log(offset.current); // mostra o offset atual
-      
-    };
+    box.style.transition = 'left 0.3s ease, top 0.3s ease';
+    box.style.left = `${initialPos.x}px`;
+    box.style.top = `${initialPos.y}px`;
+  };
 
-    box.addEventListener('mousedown', onMouseDown);
+  box.addEventListener('mousedown', onMouseDown);
 
-    return () => {
-      box.removeEventListener('mousedown', onMouseDown);
-    };
-  }, [type]);
+  return () => {
+    box.removeEventListener('mousedown', onMouseDown);
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  };
+}, [type, isDragging, initialPos]);
+
 
   return (
     <div
       ref={boxRef}
       className="tasks"
       style={{
-        
         left: `${initialPos.x}px`,
         top: `${initialPos.y}px`,
         background: color,
         padding: '20px',
         borderRadius: '10px',
-        width: '250px',
+        width: '100%',
+        maxWidth: '500px',
         color: 'white',
         userSelect: 'none',
         transition: 'left 0.3s ease, top 0.3s ease',

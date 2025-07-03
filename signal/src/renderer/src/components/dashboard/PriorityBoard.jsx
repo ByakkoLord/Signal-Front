@@ -9,7 +9,7 @@ export default function PriorityBoard({ type }) {
     const fetchedTasks = [
       {
         id: 1,
-        title: "Task 1",
+        title: "Coleta de banco de dados",
         description: "Description for Task 1",
         status: "in-progress",
         user: "Pedro",

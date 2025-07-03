@@ -81,3 +81,9 @@
 .draggable-box {
   position: absolute;
 }
+
+.delete-hover:hover {
+  background-color: rgba(255, 0, 0, 0.833);
+  cursor: pointer;
+  transform: scale(1.1);
+}
