@@ -103,9 +103,9 @@ export default function Tasks({ type, task }) {
         {task.title}
       </h1>
       <div style={{ width: '100%', height: 2, backgroundColor: 'white', marginBottom: 10, alignSelf: 'stretch' }} />
-      <h2 style={{ fontSize: '1rem', fontWeight: 'normal', alignSelf: 'flex-start' }}>{task.user}</h2>
+      <h2 style={{ fontSize: '1rem', fontWeight: 'normal', alignSelf: 'flex-start' }}>{task.users}</h2>
       <h2 style={{ fontSize: '1rem', fontWeight: 'normal', alignSelf: 'flex-start' }}>{task.client}</h2>
-      <h3 style={{ fontSize: '0.8rem', marginTop: 10, alignSelf: 'flex-start' }}>Agendado: 23/06 - 10:00</h3>
+      <h3 style={{ fontSize: '0.8rem', marginTop: 10, alignSelf: 'flex-start' }}>{task.date}</h3>
     </div>
   );
 }
