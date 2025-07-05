@@ -18,12 +18,12 @@
   background-color: #354B53;
   z-index: 1001;
   width: 75px;
-  
+
 }
 
 .topbar {
   height: 50px;
-  background-color: #51656D;
+  background-color: #354B53;
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -61,11 +61,11 @@
   height: 85vh;
   background-color: rgba(0, 0, 0, 0);
   padding-top: 20px;
-  
+
 }
 
 .tasks {
-
+  box-shadow: 0px;
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
@@ -74,8 +74,8 @@
   width: 25vw;
   padding: 10px;
   border-radius: 15px;
-  
-  
+
+
 }
 
 .draggable-box {
@@ -86,4 +86,20 @@
   background-color: rgba(255, 0, 0, 0.833);
   cursor: pointer;
   transform: scale(1.1);
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  outline: none;
+  background-color: rgba(53, 52, 52, 0.8);
+  border: none;
+  color: white;
+}
+
+.radios {
+  margin-right: 10px;
+  accent-color: rgba(53, 52, 52, 0.8);
 }

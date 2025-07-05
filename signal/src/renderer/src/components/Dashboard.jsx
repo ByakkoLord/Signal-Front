@@ -40,7 +40,7 @@ export default function Dashboard() {
         }}
         onClick={() => setOpenTaskCreator(!openTaskCreator)}
       >
-        <img width={36} height={37} src={plus} alt="" />
+        <img width={37} height={37} src={plus} alt="" />
       </button>
       {isDraggingContext && (
         <div className='delete-hover' style={{ position: 'fixed', bottom: '20px', right: '20px', zIndex: 1000, width: '300px', height: '200px', borderWidth: 2, borderColor: "white", borderStyle: 'solid', borderRadius: '10px', backgroundColor: 'rgba(255, 255, 255, 0.1)', backdropFilter: 'blur(10px)', padding: '20px', color: 'white', fontFamily: 'Poppins-regular', justifyContent: 'center', alignItems: 'center', display: 'flex', flexDirection: 'column', transition: 'all 0.3s ease' }}>
