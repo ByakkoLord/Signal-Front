@@ -25,7 +25,7 @@ export function AppProvider({ children }) {
 
   
   const socket = useMemo(() => {
-    const newSocket = io('http://localhost:3000', {
+    const newSocket = io(import.meta.env.VITE_SERVER_URL, {
       withCredentials: true,
       transports: ['websocket'], 
     });
