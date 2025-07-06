@@ -37,6 +37,8 @@ export default function Tasks({ type, task }) {
   } else if (type === 'third') {
     console.log('third');
     setColor('linear-gradient(135deg, #1A4B94, #5C8EF5)');
+  }else if (type === 'checked') {
+    setColor('linear-gradient(135deg, #1A941A, #5C8EF5)');
   }
   setId(task.id);
   console.log('Task ID:', task.id);

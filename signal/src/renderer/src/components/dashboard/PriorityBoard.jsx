@@ -38,7 +38,7 @@ useEffect(() => {
 
   return (
     <div className="priority-board">
-      {tasks.filter(task => task.priority === "alta").map((task) => (
+      {tasks.filter(task => task.priority === "alta" && task.status === "pendente").map((task) => (
         <Tasks key={task.id} type={type} task={task} />
       ))}
     </div>
