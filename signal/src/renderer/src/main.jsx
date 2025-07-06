@@ -8,10 +8,12 @@ import { AppProvider } from '../contexts/ClientContext'
 
 createRoot(document.getElementById('root')).render(
   
-  <StrictMode>
-    <AppProvider>
+  <AppProvider>
     <App />
-    </AppProvider>
-  </StrictMode>
+  </AppProvider>
+    
+    
+    
+  
   
 )

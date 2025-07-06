@@ -1,27 +1,21 @@
-import React, { useState, useEffect } from 'react'
-import { io } from 'socket.io-client'
+import React, { useState, useEffect, useContext } from 'react'
+import { AppContext } from '../../../contexts/ClientContext'
 
 export default function TaskCreator() {
-  const [socket, setSocket] = useState(null)
   const [title, setTitle] = useState('')
   const [client, setClient] = useState('')
-  const [dueDate, setDueDate] = useState('')
+  const [end_date, setEndDate] = useState(null)
   const [priority, setPriority] = useState('media')
   const [description, setDescription] = useState('')
-
-  useEffect(() => {
-    const newSocket = io('http://localhost:3000')
-    setSocket(newSocket)
-
-    return () => {
-      newSocket.disconnect()
-      console.log('Socket desconectado')
-    }
-  }, [])
+  const { socket } = useContext(AppContext)
 
   const createTask = () => {
     if (socket) {
-      socket.emit('createTask', { title, client, dueDate, priority, description })
+      console.log("Socket está ativo?", socket.connected);
+      console.log('Criando tarefa com os seguintes dados:', { title, client, end_date, priority, description });
+      socket.emit('createTask', { title, client, end_date, priority, description })
+      console.log("Socket está ativo?", socket.connected);
+
       console.log('Task enviada para o servidor')
     }
   }
@@ -68,8 +62,8 @@ export default function TaskCreator() {
         placeholder="Cliente"
       />
       <input
-        value={dueDate}
-        onChange={(e) => setDueDate(e.target.value)}
+        value={end_date}
+        onChange={(e) =>{console.log(e.target.value); setEndDate(e.target.value)}}
         className="input"
         type="date"
         placeholder="Data de entrega"

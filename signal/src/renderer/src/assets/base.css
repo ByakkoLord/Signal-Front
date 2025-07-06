@@ -103,3 +103,32 @@
   margin-right: 10px;
   accent-color: rgba(53, 52, 52, 0.8);
 }
+
+
+
+.titlebarButtons, .titlebarButtons-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  transition: all 0.3s ease;
+   height: 40px;
+   width: 50px;
+   border: none;
+   -webkit-app-region: no-drag;
+}
+
+
+
+.titlebarButtons:hover {
+   background-color: #4c6067;
+}
+
+.titlebarButtons-close:hover {
+  
+   background-color: #a52929;
+}
+
+.title-bar{
+  -webkit-app-region: drag;
+}

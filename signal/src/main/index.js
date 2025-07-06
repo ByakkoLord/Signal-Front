@@ -13,6 +13,7 @@ function createWindow() {
     title: 'Signal',
     show: false,
     autoHideMenuBar: true,
+    titleBarStyle: 'hidden',
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
@@ -36,6 +37,28 @@ function createWindow() {
   } else {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
+
+   ipcMain.on('minimize-window', () => {
+    mainWindow.minimize()
+  })
+
+  ipcMain.on('maximize-window', () => {
+    if (mainWindow.isMaximized()) {
+      mainWindow.restore()
+    } else {
+      mainWindow.maximize()
+    }
+  })
+
+  ipcMain.on('close-window', () => {
+    mainWindow.close()
+  })
+
+  if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
+    mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
+  } else {
+    mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
+  }
 }
 
 // This method will be called when Electron has finished
@@ -54,6 +77,8 @@ app.whenReady().then(() => {
 
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
+
+  
 
   createWindow()
 
