@@ -6,6 +6,13 @@
   "author": "example.com",
   "homepage": "https://electron-vite.org",
   "build": {
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Byakkolord",
+        "repo": "Signal-Front"
+      }
+    ],
     "directories": {
       "buildResources": "resources",
       "output": "dist"
