@@ -37,7 +37,7 @@ export default function FinishedTasks({  }) {
       };
     }, [socket]);
     return (
-        <div className="finished-tasks" style={{ width: '100%', height: '90%', display: 'flex', alignItems: 'center', justifyContent: 'center', overflowY: 'auto' }}>
+        <div className="finished-tasks" style={{ width: '90vw', height: '90%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
             <div className="history-board">
                   {tasks.filter(task => task.status === "feito").map((task) => (
                     <Tasks key={task.id} type={'checked'} task={task} />

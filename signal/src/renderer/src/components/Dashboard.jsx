@@ -20,6 +20,7 @@ export default function Dashboard() {
       
       <button
         style={{
+          userSelect: 'none',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',

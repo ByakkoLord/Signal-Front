@@ -13,7 +13,7 @@ export default function TaskCreator() {
     if (socket) {
       console.log("Socket está ativo?", socket.connected);
       console.log('Criando tarefa com os seguintes dados:', { title, client, end_date, priority, description, users: loggedInUser });
-      socket.emit('createTask', { title, client, end_date, priority, description, users: loggedInUser })
+      socket.emit('createTask', { title, client, end_date, priority, description, created_by: loggedInUser })
       console.log("Socket está ativo?", socket.connected);
 
       console.log('Task enviada para o servidor')
