@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
+import classNames from 'classnames';
 import { AppContext } from '../../../contexts/ClientContext';
 
 
@@ -11,6 +12,7 @@ export default function Tasks({ type, task }) {
   if (!task) return null;
   
   const [color, setColor] = useState('');
+  const [deleting, setDeleting] = useState(false);
   const [ id, setId ] = useState();
 
   const isoDate = task.end_date
@@ -44,7 +46,9 @@ export default function Tasks({ type, task }) {
 
   return (
     <div
-      className="tasks"
+      className={classNames('tasks', { deleting })}
+
+
       style={{
         background: color,
         padding: '20px',
@@ -74,7 +78,7 @@ export default function Tasks({ type, task }) {
       <h3 style={{ fontSize: '0.8rem', marginTop: 10, alignSelf: 'flex-start' }}>{formattedDate}</h3>
       <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginTop: 20, width: '100%', gap: 20 }}>
         <img style={{ width: '20px', height: '20px', cursor: 'pointer' }} src={checked} alt="" />
-        <img onClick={() => {socket.emit('deleteTask', { id });}} style={{ width: '20px', height: '20px', cursor: 'pointer' }} src={delete_icon} alt="" />
+        <img onClick={() => {setTimeout(() => {socket.emit('deleteTask', { id })}, 1000), setDeleting(true)}} style={{ width: '20px', height: '20px', cursor: 'pointer' }} src={delete_icon} alt="" />
       </div>
     </div>
   );

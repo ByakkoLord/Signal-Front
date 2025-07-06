@@ -61,7 +61,6 @@
   height: 85vh;
   background-color: rgba(0, 0, 0, 0);
   padding-top: 20px;
-
 }
 
 .tasks {
@@ -74,8 +73,6 @@
   width: 25vw;
   padding: 10px;
   border-radius: 15px;
-
-
 }
 
 .draggable-box {
@@ -131,4 +128,19 @@
 
 .title-bar{
   -webkit-app-region: drag;
+}
+
+.deleting {
+  animation: deleteTask 1.3s forwards;
+}
+
+@keyframes deleteTask {
+  0% {
+    opacity: 1;
+    transform: scale(1)
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.1);
+  }
 }
