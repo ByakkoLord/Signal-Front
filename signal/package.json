@@ -1,11 +1,12 @@
 {
   "name": "signal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An Electron application with React",
   "main": "./out/main/index.js",
   "author": "example.com",
   "homepage": "https://electron-vite.org",
   "build": {
+    "icon": "./src/renderer/src/assets/dashboard white.png",
     "publish": [
       {
         "provider": "github",
