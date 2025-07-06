@@ -17,6 +17,7 @@ export default function Dashboard() {
       <PriorityBoard type="first" />
       <SecondaryBoard type="second" />
       <LastBoard type="third" />
+      
       <button
         style={{
           display: 'flex',

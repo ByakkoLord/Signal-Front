@@ -20,6 +20,8 @@ export function AppProvider({ children }) {
   const [draggedTaskId, setDraggedTaskId] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [socketReady, setSocketReady] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState("asdasd");
+  const [sidebarSelected, setSidebarSelected] = useState(1);
 
   
   const socket = useMemo(() => {
@@ -67,6 +69,10 @@ export function AppProvider({ children }) {
         setLoggedIn,
         socket,
         socketReady,
+        loggedInUser,
+        setLoggedInUser,
+        sidebarSelected,
+        setSidebarSelected,
       }}
     >
       {children}

@@ -13,6 +13,7 @@ export default function Tasks({ type, task }) {
   
   const [color, setColor] = useState('');
   const [deleting, setDeleting] = useState(false);
+  const [finTask, setFinTask] = useState(false);
   const [ id, setId ] = useState();
 
   const isoDate = task.end_date
@@ -46,7 +47,7 @@ export default function Tasks({ type, task }) {
 
   return (
     <div
-      className={classNames('tasks', { deleting })}
+      className={classNames('tasks', { deleting, finTask })}
 
 
       style={{
@@ -73,11 +74,11 @@ export default function Tasks({ type, task }) {
         {task.title}
       </h1>
       <div style={{ width: '100%', height: 2, backgroundColor: 'white', marginBottom: 10, alignSelf: 'stretch' }} />
-      <h2 style={{ fontSize: '1rem', fontWeight: 'normal', alignSelf: 'flex-start' }}>{task.users}</h2>
       <h2 style={{ fontSize: '1rem', fontWeight: 'normal', alignSelf: 'flex-start' }}>{task.client}</h2>
       <h3 style={{ fontSize: '0.8rem', marginTop: 10, alignSelf: 'flex-start' }}>{formattedDate}</h3>
+      <h2 style={{ fontSize: '0.8rem', alignSelf: 'flex-start' }}>Criado por {task.users}</h2>
       <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginTop: 20, width: '100%', gap: 20 }}>
-        <img style={{ width: '20px', height: '20px', cursor: 'pointer' }} src={checked} alt="" />
+        <img onClick={() => {setTimeout(() => {socket.emit('updateTask', { id })}, 1000), setFinTask(true)}} style={{ width: '20px', height: '20px', cursor: 'pointer' }} src={checked} alt="" />
         <img onClick={() => {setTimeout(() => {socket.emit('deleteTask', { id })}, 1000), setDeleting(true)}} style={{ width: '20px', height: '20px', cursor: 'pointer' }} src={delete_icon} alt="" />
       </div>
     </div>

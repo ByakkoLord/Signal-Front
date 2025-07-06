@@ -3,35 +3,50 @@ import Sidebar from './components/Sidebar'
 import Dashboard from './components/Dashboard'
 import TitleBar from './components/TitleBar'
 import LoginForm from './components/LoginForm'
+import FinishedTasks from './components/FinishedTasks'
 import { useAppContext } from '../contexts/ClientContext'
 
-import React, { useState, useEffect, socket } from 'react'
+import React, { useState, useEffect } from 'react'
 
 function App() {
-  const { loggedIn, socket } = useAppContext();
+  const { loggedIn, socket, sidebarSelected, setSidebarSelected } = useAppContext()
+
+  
 
   useEffect(() => {
-   socket.on('verify', () => {
-     setLoggedIn(true)
-   })
+    
+    socket.on('verify', () => {
+      setLoggedIn(true)
+    })
+    switch (sidebarSelected) {
+    case 1:
+      setSidebarSelected(1)
+      break
+    case 2:
+      setSidebarSelected(2)
+      break
+    default:
+      setSidebarSelected(1)
+      break
+  }
   }, [])
-
 
   return (
     <>
       <TitleBar />
       {loggedIn ? (
-        
-          
-          <div className="sidebar-container">
-            <Sidebar />
-            <div className="sidebar-middle">
-              <div className="w-full h-screen flex flex-col items-center justify-center">
-                <Dashboard />
+        <div className="sidebar-container">
+          <Sidebar />
+          <div className="sidebar-middle">
+            <div style={{ height: '100vh', color: 'white' }}>
+              {sidebarSelected === 1 && <Dashboard />}
+              {sidebarSelected === 2 && <FinishedTasks />}
+              <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                <p>Made by Byakko and Sunno</p>
               </div>
             </div>
           </div>
-        
+        </div>
       ) : (
         <LoginForm />
       )}
