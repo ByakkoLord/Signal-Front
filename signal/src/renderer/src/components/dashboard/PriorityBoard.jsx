@@ -23,7 +23,7 @@ export default function PriorityBoard({ type }) {
       })
     }
 
-    ;(socket.on('tasksD', handleTasks), setReload((prev) => !prev))
+    (socket.on('tasksD', handleTasks), setReload((prev) => !prev))
 
     socket.on('taskDeleted', (removedTaskId) => {
       console.log(`🗑️ Task ${removedTaskId.id} foi deletada com sucesso`)
