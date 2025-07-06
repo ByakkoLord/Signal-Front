@@ -3,43 +3,49 @@ import { AppContext } from '../../../contexts/ClientContext'
 import Tasks from './Tasks'
 
 export default function PriorityBoard({ type }) {
+  const [reload, setReload] = useState(false)
   const [tasks, setTasks] = useState([])
   const { socket } = useContext(AppContext)
+  useEffect(() => {
+    console.log('🔄 Reloading tasks...')
+  }, [reload])
 
-useEffect(() => {
-  if (!socket) return;
+  useEffect(() => {
+    if (!socket) return
 
-  console.log("🔌 Socket conectado?", socket.connected);
+    console.log('🔌 Socket conectado?', socket.connected)
 
-  const handleTasks = (data) => {
-    console.log('📥 Tasks recebidas:', data);
-    setTasks(prev => {
-  const newTasks = data.filter(task => !prev.some(t => t.id === task.id));
-  return [...prev, ...newTasks];
-});
-  };
+    const handleTasks = (data) => {
+      console.log('📥 Tasks recebidas:', data)
+      setTasks((prev) => {
+        const newTasks = data.filter((task) => !prev.some((t) => t.id === task.id))
+        return [...prev, ...newTasks]
+      })
+    }
 
-  socket.on("tasksD", handleTasks);
+    ;(socket.on('tasksD', handleTasks), setReload((prev) => !prev))
 
-    socket.on("taskDeleted", (removedTaskId) => {
-    console.log(`🗑️ Task ${removedTaskId.id} foi deletada com sucesso`);
-    setTasks(prev => prev.filter(task => task.id !== removedTaskId.id));
-  });
+    socket.on('taskDeleted', (removedTaskId) => {
+      console.log(`🗑️ Task ${removedTaskId.id} foi deletada com sucesso`)
+      setTasks((prev) => prev.filter((task) => task.id !== removedTaskId.id))
+    })
 
-  socket.emit("requestTasks", () => {
-    console.log('📤 Requisitando tasks do servidor');
-  });
+    socket.emit('requestTasks', () => {
+      console.log('📤 Requisitando tasks do servidor')
+    })
 
-  return () => {
-    socket.off("tasksD", handleTasks); 
-  };
-}, [socket]);
+    return () => {
+      socket.off('tasksD', handleTasks)
+    }
+  }, [socket])
 
   return (
     <div className="priority-board">
-      {tasks.filter(task => task.priority === "baixa" && task.status === "pendente").map((task) => (
-        <Tasks key={task.id} type={type} task={task} />
-      ))}
+      {tasks
+        .filter((task) => task.priority === 'baixa' && task.status === 'pendente')
+        .map((task) => (
+          <Tasks key={task.id} type={type} task={task} />
+        ))}
     </div>
   )
 }
