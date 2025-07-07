@@ -4,5 +4,4 @@ out
 .DS_Store
 .eslintcache
 .env
-\src\renderer\index.html
 *.log*
