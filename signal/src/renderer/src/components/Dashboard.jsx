@@ -11,14 +11,28 @@ import deleteIcon from '../assets/delete.png'
 
 export default function Dashboard() {
   const [openTaskCreator, setOpenTaskCreator] = React.useState(false)
+  const { setCreatorState } = useContext(AppContext)
+
+  const handleTaskCreatorToggle = () => {
+    if (openTaskCreator) {
+      setTimeout(() => {
+        setOpenTaskCreator(false)
+      }, 1000)
+      setCreatorState(false)
+    } else if (!openTaskCreator) {
+      setCreatorState(true)
+      setOpenTaskCreator(true)
+    }
+  }
 
   return (
     <div className="dashboard">
       <PriorityBoard type="first" />
       <SecondaryBoard type="second" />
       <LastBoard type="third" />
-      
+
       <button
+        className="task-creator-button"
         style={{
           userSelect: 'none',
           display: 'flex',
@@ -35,9 +49,14 @@ export default function Dashboard() {
           borderRadius: '50%',
           backgroundColor: '#4CAF50',
           color: 'white',
-          cursor: 'pointer',
+          cursor: 'pointer'
         }}
-        onClick={() => setOpenTaskCreator(!openTaskCreator)}
+        onClick={() => {
+          handleTaskCreatorToggle()
+          if (!openTaskCreator) {
+            setCreatorState(true)
+          } else setCreatorState(false)
+        }}
       >
         <img width={37} height={37} src={plus} alt="" />
       </button>
