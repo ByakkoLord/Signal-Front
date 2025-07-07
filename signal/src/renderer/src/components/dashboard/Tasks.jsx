@@ -15,6 +15,7 @@ export default function Tasks({ type, task }) {
   const [deleting, setDeleting] = useState(false);
   const [finTask, setFinTask] = useState(false);
   const [ id, setId ] = useState();
+  const [hover, setHover] = useState(false);
 
   const isoDate = task.end_date
   const date = new Date(isoDate);
@@ -61,7 +62,11 @@ export default function Tasks({ type, task }) {
         color: 'white',
         userSelect: 'none',
         transition: 'left 0.3s ease, top 0.3s ease',
+        transform: hover ? 'scale(1.05)' : 'scale(1)',
+        cursor: 'pointer',
       }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
     >
       <h1
         style={{
@@ -77,6 +82,9 @@ export default function Tasks({ type, task }) {
       </h1>
       <div style={{ width: '100%', height: 2, backgroundColor: 'white', marginBottom: 10, alignSelf: 'stretch' }} />
       <h2 style={{ fontSize: '1rem', fontWeight: 'normal', alignSelf: 'flex-start' }}>{task.client}</h2>
+      <p style={{ maxHeight: hover ? '100px' : '0', overflow: 'hidden', transition: 'max-height 0.3s ease' }}>{task.description}</p>
+
+
       <h3 style={{ fontSize: '0.8rem', marginTop: 10, alignSelf: 'flex-start' }}>{formattedDate}</h3>
       <h2 style={{ fontSize: '0.8rem', alignSelf: 'flex-start' }}>Criado por {task.created_by}</h2>
       <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginTop: 20, width: '100%', gap: 20 }}>
