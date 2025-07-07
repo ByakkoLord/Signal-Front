@@ -65,6 +65,8 @@
 
 .history-board {
   overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
   display: flex;
   flex-wrap: wrap-reverse;
   justify-content: center;
@@ -141,6 +143,49 @@
   cursor: pointer;
 }
 
+.task-creator-opening {
+  animation: task-creator-opening 0.3s forwards;
+}
+
+.task-creator-closing {
+  animation: task-creator-closing 0.3s forwards;
+}
+
+@keyframes task-creator-closing {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  
+}
+
+@keyframes task-creator-opening {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.task-creator-button {
+  background-color: rgba(34, 82, 71, 0.8);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.task-creator-button:hover {
+  background-color: rgba(53, 52, 52, 0.8);
+  cursor: pointer;
+  transform: scale(1.3);
+}
+
 .titlebarButtons:hover {
    background-color: #4c6067;
 }
@@ -197,6 +242,20 @@
    background-color: #f0f0f0;
    border-radius: 10px;
    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.task-icons:hover {
+  transform: scale(1.2);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  
+}
+
+.task-creator-button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+
 }
 
 

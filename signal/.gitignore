@@ -3,5 +3,6 @@ dist
 out
 .DS_Store
 .eslintcache
-*.log*
 .env
+\src\renderer\index.html
+*.log*

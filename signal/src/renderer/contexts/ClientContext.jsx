@@ -22,6 +22,7 @@ export function AppProvider({ children }) {
   const [socketReady, setSocketReady] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState("asdasd");
   const [sidebarSelected, setSidebarSelected] = useState(1);
+  const [creatorState, setCreatorState] = useState(false);
 
   
   const socket = useMemo(() => {
@@ -73,6 +74,8 @@ export function AppProvider({ children }) {
         setLoggedInUser,
         sidebarSelected,
         setSidebarSelected,
+        creatorState,
+        setCreatorState,
       }}
     >
       {children}
