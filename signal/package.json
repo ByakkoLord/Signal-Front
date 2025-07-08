@@ -41,6 +41,7 @@
     "builder": "^5.0.0",
     "classnames": "^2.5.1",
     "electron-updater": "^6.3.9",
+    "node-notifier": "^10.0.1",
     "socket.io-client": "^4.8.1"
   },
   "devDependencies": {
