@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
+import classNames from 'classnames'
 import { AppContext } from '../../../contexts/ClientContext'
 
 export default function TaskCreator() {
@@ -7,7 +8,8 @@ export default function TaskCreator() {
   const [end_date, setEndDate] = useState(null)
   const [priority, setPriority] = useState('media')
   const [description, setDescription] = useState('')
-  const { socket, loggedInUser } = useContext(AppContext)
+
+  const { socket, loggedInUser, creatorState, setCreatorState } = useContext(AppContext)
 
   const createTask = () => {
     if (socket) {
@@ -17,12 +19,13 @@ export default function TaskCreator() {
       console.log("Socket está ativo?", socket.connected);
 
       console.log('Task enviada para o servidor')
+      setCreatorState(false)
     }
   }
 
   return (
     <div
-      className="task-creator"
+      className={classNames('task-creator', { 'task-creator-closing': !creatorState, 'task-creator-opening': creatorState })}
       style={{
         position: 'fixed',
         bottom: '80px',
@@ -130,11 +133,12 @@ export default function TaskCreator() {
       />
 
       <button
+      className='task-creator-button'
         style={{
           width: '100%',
           padding: '10px',
           borderRadius: '5px',
-          backgroundColor: 'rgba(34, 82, 71, 0.8)',
+          
           border: 'none',
           color: 'white'
         }}
