@@ -10,7 +10,6 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins-regular', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
 }
 
 body {
@@ -31,4 +30,18 @@ body {
 
 *::-webkit-scrollbar-thumb:hover {
   background-color: #555;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+a {
+  color: #00aaff;
+  text-decoration: none;
 }

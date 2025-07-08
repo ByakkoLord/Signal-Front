@@ -11,24 +11,21 @@ import React, { useState, useEffect } from 'react'
 function App() {
   const { loggedIn, socket, sidebarSelected, setSidebarSelected } = useAppContext()
 
-  
-
   useEffect(() => {
-    
     socket.on('verify', () => {
       setLoggedIn(true)
     })
     switch (sidebarSelected) {
-    case 1:
-      setSidebarSelected(1)
-      break
-    case 2:
-      setSidebarSelected(2)
-      break
-    default:
-      setSidebarSelected(1)
-      break
-  }
+      case 1:
+        setSidebarSelected(1)
+        break
+      case 2:
+        setSidebarSelected(2)
+        break
+      default:
+        setSidebarSelected(1)
+        break
+    }
   }, [])
 
   return (
@@ -42,7 +39,16 @@ function App() {
               {sidebarSelected === 1 && <Dashboard />}
               {sidebarSelected === 2 && <FinishedTasks />}
               <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                <p>Made by Byakko and Sunno</p>
+                <p>
+                  Made by&nbsp;
+                  <a target="_blank" href="https://github.com/ByakkoLord">
+                    @ByakkoLord&nbsp;
+                  </a>
+                  and&nbsp;
+                  <a target="_blank" href="https://github.com/nobackslash">
+                    @nobackslash
+                  </a>
+                </p>
               </div>
             </div>
           </div>
