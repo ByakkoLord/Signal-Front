@@ -1,63 +1,57 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
-import io from 'socket.io-client';
+import React, { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import io from 'socket.io-client'
+import { showNotification } from '../src/scripts/notification'
 
-export const AppContext = createContext();
+export const AppContext = createContext()
 
 export function useAppContext() {
-  return useContext(AppContext);
+  return useContext(AppContext)
 }
 
 export function AppProvider({ children }) {
-  console.log("🔄 AppProvider montado");
+  console.log('🔄 AppProvider montado')
 
-  const [isDraggingContext, setIsDraggingContext] = useState(false);
-  const [draggedTaskId, setDraggedTaskId] = useState(null);
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [socketReady, setSocketReady] = useState(false);
-  const [loggedInUser, setLoggedInUser] = useState("asdasd");
-  const [sidebarSelected, setSidebarSelected] = useState(1);
-  const [creatorState, setCreatorState] = useState(false);
+  const [isDraggingContext, setIsDraggingContext] = useState(false)
+  const [draggedTaskId, setDraggedTaskId] = useState(null)
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [socketReady, setSocketReady] = useState(false)
+  const [loggedInUser, setLoggedInUser] = useState('asdasd')
+  const [sidebarSelected, setSidebarSelected] = useState(1)
+  const [creatorState, setCreatorState] = useState(false)
 
-  
   const socket = useMemo(() => {
     const newSocket = io(import.meta.env.VITE_SERVER_URL, {
       withCredentials: true,
-      transports: ['websocket'], 
-    });
+      transports: ['websocket']
+    })
 
-    return newSocket;
-  }, []);
+    return newSocket
+  }, [])
 
   useEffect(() => {
-    console.log("🔁 useEffect do AppProvider montado");
+    console.log('🔁 useEffect do AppProvider montado')
     const handleConnect = () => {
-      console.log('✅ WebSocket conectado');
-      setSocketReady(true);
-    };
+      console.log('✅ WebSocket conectado')
+      setSocketReady(true)
+    }
 
     const handleDisconnect = () => {
-      console.log('❌ WebSocket desconectado');
-      setSocketReady(false);
-    };
+      console.log('❌ WebSocket desconectado')
+      setSocketReady(false)
+    }
 
-    socket.on('connect', handleConnect);
-    socket.on('disconnect', handleDisconnect);
+    socket.on('connect', handleConnect)
+    socket.on('disconnect', handleDisconnect)
     socket.on('connect_error', (err) => {
-      console.error('🚫 Erro de conexão:', err.message);
-    });
+      console.error('🚫 Erro de conexão:', err.message)
+      showNotification('connectionError')
+    })
 
-    
     return () => {
-      socket.off('connect', handleConnect);
-      socket.off('disconnect', handleDisconnect);
-    };
-  }, [socket]);
+      socket.off('connect', handleConnect)
+      socket.off('disconnect', handleDisconnect)
+    }
+  }, [socket])
 
   return (
     <AppContext.Provider
@@ -75,10 +69,10 @@ export function AppProvider({ children }) {
         sidebarSelected,
         setSidebarSelected,
         creatorState,
-        setCreatorState,
+        setCreatorState
       }}
     >
       {children}
     </AppContext.Provider>
-  );
+  )
 }
