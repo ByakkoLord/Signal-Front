@@ -49,3 +49,8 @@ a {
 input:hover {
   transform: scale(1.02);
 }
+
+label:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+}

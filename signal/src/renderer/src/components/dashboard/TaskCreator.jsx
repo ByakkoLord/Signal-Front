@@ -86,28 +86,31 @@ export default function TaskCreator() {
             className="radios"
             type="radio"
             name="prioridade"
+            id='prioridade'
             value="alta"
           />
           Alta
         </label>
-        <label htmlFor="prioridade-media">
+        <label htmlFor="prioridade1">
           <input
             checked={priority === 'media'}
             onChange={(e) => setPriority(e.target.value)}
             className="radios"
             type="radio"
             name="prioridade"
+            id='prioridade1'
             value="media"
           />
           Média
         </label>
-        <label htmlFor="prioridade-baixa">
+        <label htmlFor="prioridade2">
           <input
             checked={priority === 'baixa'}
             onChange={(e) => setPriority(e.target.value)}
             className="radios"
             type="radio"
             name="prioridade"
+            id='prioridade2'
             value="baixa"
           />
           Baixa
