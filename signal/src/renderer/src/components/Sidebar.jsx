@@ -36,6 +36,19 @@ export default function Sidebar() {
       >
         <img width={30} src={history} alt="" style={{ userSelect: 'none' }} />
       </div>
+      <div
+        onClick={() => setSidebarSelected(3)}
+        className={classNames('sidebar-item', { 'sidebar-item-selected': sidebarSelected === 3 })}
+        style={{
+          width: '100%',
+          height: 60,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        <img width={30} src={rep} alt="" style={{ userSelect: 'none' }} />
+      </div>
     </div>
   )
 }

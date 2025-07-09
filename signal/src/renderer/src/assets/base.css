@@ -53,6 +53,16 @@
   justify-content: center;
 }
 
+.rep-screen {
+  overflow-y: auto;
+  height: 90vh;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 5vw;
+  justify-content: center;
+}
+
 .finished-tasks {
   overflow-y: auto;
   flex: 1;
