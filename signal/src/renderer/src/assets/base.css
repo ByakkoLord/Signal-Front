@@ -58,9 +58,9 @@
   height: 90vh;
   flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 5vw;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .finished-tasks {
@@ -465,4 +465,73 @@ main {
   100% {
     opacity: 0.1;
   }
+}
+
+/*REP */
+.reps {
+  display: flex;
+  padding: 20px;
+  max-width: 800px;
+  background: linear-gradient(to right, #354B53, #5A6B73);
+  border-radius: 20px;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reps-accessories {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.search {
+  display: flex;
+  width: 820px;
+  justify-content: space-evenly;
+}
+
+.search input {
+  width: 700px;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  border: none;
+  background: linear-gradient(to right, #3f2222, #19323e);
+  outline: none;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.search button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #19323e;
+  transition: all 0.3s ease;
+}
+
+.search button:hover {
+  background-color: #7e8b91;
+  transform: scale(1.1);
+}
+
+
+.rep-creator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(to right, #a5aeb1, #6eb1d0);
+  border-radius: 20px;
 }
