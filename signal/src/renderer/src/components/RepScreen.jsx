@@ -12,7 +12,11 @@ export default function Dashboard() {
   return (
     <div className="rep-screen">
       <Search />
+      <div className='teste' style={{ display: 'flex', flexDirection: 'column', gap: 100, overflowY: 'auto', maxHeight: '80vh' }}>
+
       <Reps />
+      <Reps />
+      </div>
       {creatorState && (<RepCreator />)}
     </div>
   )

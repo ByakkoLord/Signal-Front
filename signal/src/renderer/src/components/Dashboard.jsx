@@ -47,7 +47,7 @@ export default function Dashboard() {
           marginTop: '20px',
           padding: '10px',
           borderRadius: '50%',
-          backgroundColor: '#4CAF50',
+          background: 'linear-gradient(to right, #623535ff, #2d596dff)',
           color: 'white',
           cursor: 'pointer'
         }}

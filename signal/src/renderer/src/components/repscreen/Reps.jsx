@@ -1,6 +1,10 @@
 import repIdClass from '../../assets/repsImages/rep1.jpg'
 import checkmark from '../../assets/repsImages/check-mark.png'
 import Xmark from '../../assets/repsImages/x-mark.png'
+import checkMarkgreen from '../../assets/repsImages/check-mark-green.png'
+import tool from '../../assets/repsImages/tool.png'
+import waitingDelivery from '../../assets/repsImages/waiting-delivery.png'
+import waitingDelivery2 from '../../assets/repsImages/waiting-delivery2.png'
 
 
 export default function Reps() {
@@ -19,9 +23,9 @@ export default function Reps() {
         />
         <div>
           <div style={{ backgroundColor: '#3f4f55', padding: 10, borderRadius: 10 }}>
-            <h3>Número de Série: 00014003750123456</h3>
-            <h3>Modelo: IdClass 671</h3>
-            <h3>Cliente: Texas Carnes</h3>
+            <h4>Número de Série: 00014003750123456</h4>
+            <h4>Modelo: IdClass 671</h4>
+            <h4>Cliente: Texas Carnes</h4>
           </div>
 
           <div style={{ marginTop: 10, backgroundColor: '#3f4f55', padding: 10, borderRadius: 10 }}>
@@ -38,7 +42,12 @@ export default function Reps() {
               <h4>Bobina</h4> <img width={16} height={16} src={Xmark} alt="" />
             </div>
           </div>
+          
         </div>
+        <div style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', width: 170, height: 226, borderRadius: 10, backgroundColor: '#3f4f55', marginLeft: 'auto', display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <img width={100} src={waitingDelivery} alt="" />
+            <h3 style={{ textAlign: 'center' }}>Aguardando análise</h3>
+          </div>
       </div>
       <div
         style={{
@@ -49,11 +58,11 @@ export default function Reps() {
           marginTop: 20
         }}
       >
-        <div
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+          <div
           style={{
             overflowY: 'auto',
-            maxHeight: 190,
-            maxWidth: '50%',
+            maxHeight: 80,
             marginTop: 20,
             backgroundColor: '#3f4f55',
             padding: 10,
@@ -69,11 +78,31 @@ export default function Reps() {
         </div>
         <div
           style={{
+            overflowY: 'auto',
+            maxHeight: 80,
+            marginTop: 20,
+            backgroundColor: '#3f4f55',
+            padding: 10,
+            borderRadius: 10
+          }}
+        >
+          <h2>Obsercações:</h2>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt, voluptas laboriosam
+            in velit quibusdam nisi cumque beatae impedit modi rem quos aliquam exercitationem,
+            reiciendis dignissimos quae, cum fugit facilis iure!
+          </p>
+        </div>
+        </div>
+        
+        <div
+          style={{
             display: 'flex',
             flexDirection: 'column',
             
             maxHeight: 200,
             marginTop: 20,
+            minWidth: 300,
             backgroundColor: '#3f4f55',
             gap: 10,
             padding: 10,
