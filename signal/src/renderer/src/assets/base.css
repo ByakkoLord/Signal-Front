@@ -54,7 +54,6 @@
 }
 
 .rep-screen {
-  overflow-y: auto;
   height: 90vh;
   flex: 1;
   display: flex;
@@ -487,6 +486,8 @@ main {
 
 .search {
   display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
   width: 820px;
   justify-content: space-evenly;
 }
@@ -532,6 +533,47 @@ main {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: linear-gradient(to right, #a5aeb1, #6eb1d0);
+  background: linear-gradient(to right, #3f2222, #19323e);
   border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.rep-creator form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.rep-creator input {
+  width: 300px;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  border: none;
+  background-color:  #291818;
+  outline: none;
+  color: white;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.rep-creator input:hover {
+  background-color: #3f2222;
+}
+
+.rep-creator button {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #234657;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.rep-creator button:hover {
+  background-color: #7e8b91;
+  transform: scale(1.1);
 }
