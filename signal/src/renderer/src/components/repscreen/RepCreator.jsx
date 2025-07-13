@@ -12,7 +12,24 @@ export default function RepCreator() {
     clientName: '',
     equipmentModel: '',
     manufacturer: '',
-    report: ''
+    obs: '',
+    tecnico: 'Guilherme',
+    itensDelivery: {
+      fonte: false,
+      rolete: false,
+      bobina: false,
+      semCaixa: false,
+      notaFiscal: false
+    },
+    fichaTecnica: {
+      fonte: false,
+      display: false,
+      biometriaDigital: false,
+      impressao: false,
+      comunicacao: false,
+      noBreak: false,
+      bateriaCR2032: false
+    }
   })
   const verifySerial = (serial) => {
     if (serial === '1') {
@@ -48,9 +65,27 @@ export default function RepCreator() {
 
           {unlocked && (
             <>
-              <input type="text" className="input1" placeholder="Modelo do equipamento" />
-              <input type="text" className="input1" placeholder="Fabricante" />
-              <input type="text" className="input1" placeholder="Nome do cliente" />
+              <input
+                value={newRep.equipmentModel}
+                onChange={(e) => setNewRep({ ...newRep, equipmentModel: e.target.value })}
+                type="text"
+                className="input1"
+                placeholder="Modelo do equipamento"
+              />
+              <input
+                value={newRep.manufacturer}
+                onChange={(e) => setNewRep({ ...newRep, manufacturer: e.target.value })}
+                type="text"
+                className="input1"
+                placeholder="Fabricante"
+              />
+              <input
+                value={newRep.clientName}
+                onChange={(e) => setNewRep({ ...newRep, clientName: e.target.value })}
+                type="text"
+                className="input1"
+                placeholder="Nome do cliente"
+              />
             </>
           )}
 
@@ -77,22 +112,55 @@ export default function RepCreator() {
             <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
               <label className="label1" htmlFor="NovoRep">
                 {' '}
-                <input id="NovoRep" name="RepType" className="checkInput1" type="radio" /> Novo REP
+                <input
+                  value={newRep.type}
+                  id="NovoRep"
+                  name="RepType"
+                  className="checkInput1"
+                  type="radio"
+                />{' '}
+                Novo REP
               </label>
               <label className="label1" htmlFor="Manutencao">
                 {' '}
-                <input id="Manutencao" name="RepType" className="checkInput1" type="radio" />{' '}
+                <input
+                  value={newRep.type}
+                  id="Manutencao"
+                  name="RepType"
+                  className="checkInput1"
+                  type="radio"
+                />{' '}
                 Manutenção
               </label>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
               <label className="label1" htmlFor="Fonte">
                 {' '}
-                <input id="Fonte" name="Fonte" className="checkInput1" type="checkbox" /> Fonte
+                <input
+                  checked={newRep.itensDelivery.fonte}
+                  onChange={(e) =>
+                    setNewRep({
+                      ...newRep,
+                      itensDelivery: { ...newRep.itensDelivery, fonte: e.target.checked }
+                    })
+                  }
+                  id="Fonte"
+                  name="Fonte"
+                  className="checkInput1"
+                  type="checkbox"
+                />{' '}
+                Fonte
               </label>
               <label className="label1" htmlFor="NotaFiscal">
                 {' '}
                 <input
+                  checked={newRep.itensDelivery.notaFiscal}
+                  onChange={(e) =>
+                    setNewRep({
+                      ...newRep,
+                      itensDelivery: { ...newRep.itensDelivery, notaFiscal: e.target.checked }
+                    })
+                  }
                   id="NotaFiscal"
                   name="NotaFiscal"
                   className="checkInput1"
@@ -102,19 +170,63 @@ export default function RepCreator() {
               </label>
               <label className="label1" htmlFor="Rolete">
                 {' '}
-                <input id="Rolete" name="Rolete" className="checkInput1" type="checkbox" /> Rolete
+                <input
+                  checked={newRep.itensDelivery.rolete}
+                  onChange={(e) =>
+                    setNewRep({
+                      ...newRep,
+                      itensDelivery: { ...newRep.itensDelivery, rolete: e.target.checked }
+                    })
+                  }
+                  id="Rolete"
+                  name="Rolete"
+                  className="checkInput1"
+                  type="checkbox"
+                />{' '}
+                Rolete
               </label>
               <label className="label1" htmlFor="Bobina">
                 {' '}
-                <input id="Bobina" name="Bobina" className="checkInput1" type="checkbox" /> Bobina
+                <input
+                  checked={newRep.itensDelivery.bobina}
+                  onChange={(e) =>
+                    setNewRep({
+                      ...newRep,
+                      itensDelivery: { ...newRep.itensDelivery, bobina: e.target.checked }
+                    })
+                  }
+                  id="Bobina"
+                  name="Bobina"
+                  className="checkInput1"
+                  type="checkbox"
+                />{' '}
+                Bobina
               </label>
               <label className="label1" htmlFor="SemCaixa">
                 {' '}
-                <input id="SemCaixa" name="SemCaixa" className="checkInput1" type="checkbox" /> Sem
-                caixa
+                <input
+                  checked={newRep.itensDelivery.semCaixa}
+                  onChange={(e) =>
+                    setNewRep({
+                      ...newRep,
+                      itensDelivery: { ...newRep.itensDelivery, semCaixa: e.target.checked }
+                    })
+                  }
+                  id="SemCaixa"
+                  name="SemCaixa"
+                  className="checkInput1"
+                  type="checkbox"
+                />{' '}
+                Sem caixa
               </label>
             </div>
-            <input type="text" className="input1" placeholder="Observações" />
+            <input
+              value={newRep.obs}
+              onChange={(e) => setNewRep({ ...newRep, observacoes: e.target.value })}
+              type="text"
+              className="input1"
+              placeholder="Observações"
+            />
 
             <div
               style={{
@@ -139,47 +251,139 @@ export default function RepCreator() {
         <div className="rep-creator">
           <form className="unlocked">
             <h2>Ficha Técnica</h2>
-            <div style={{ display: 'flex', gap: '10px', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-end' }}>
+            <div
+              style={{
+                display: 'flex',
+                gap: '10px',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'flex-end'
+              }}
+            >
               <h3>Os seguintes itens estão funcionando?</h3>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                 <label className="label1" htmlFor="Fonte1">
                   {' '}
-                  <input id="Fonte1" className="checkInput1" type="checkbox" /> Fonte
+                  <input
+                    checked={newRep.fichaTecnica.fonte}
+                    onChange={(e) =>
+                      setNewRep({
+                        ...newRep,
+                        fichaTecnica: { ...newRep.fichaTecnica, fonte: e.target.checked }
+                      })
+                    }
+                    id="Fonte1"
+                    className="checkInput1"
+                    type="checkbox"
+                  />{' '}
+                  Fonte
                 </label>
                 <label className="label1" htmlFor="Display">
                   {' '}
-                  <input id="Display" className="checkInput1" type="checkbox" /> Display
-                  {' '}
+                  <input
+                    checked={newRep.fichaTecnica.display}
+                    onChange={(e) =>
+                      setNewRep({
+                        ...newRep,
+                        fichaTecnica: { ...newRep.fichaTecnica, display: e.target.checked }
+                      })
+                    }
+                    id="Display"
+                    className="checkInput1"
+                    type="checkbox"
+                  />{' '}
+                  Display{' '}
                 </label>
                 <label className="label1" htmlFor="BiometriaDigital">
                   {' '}
-                  <input id="BiometriaDigital" className="checkInput1" type="checkbox" /> Biometria Digital
-                  {' '}
+                  <input
+                    checked={newRep.fichaTecnica.biometriaDigital}
+                    id="BiometriaDigital"
+                    className="checkInput1"
+                    type="checkbox"
+                    onChange={(e) =>
+                      setNewRep({
+                        ...newRep,
+                        fichaTecnica: { ...newRep.fichaTecnica, biometriaDigital: e.target.checked }
+                      })
+                    }
+                  />{' '}
+                  Biometria Digital{' '}
                 </label>
                 <label className="label1" htmlFor="Impressao">
                   {' '}
-                  <input id="Impressao" className="checkInput1" type="checkbox" /> Impressão
-                  {' '}
+                  <input
+                    checked={newRep.fichaTecnica.impressao}
+                    id="Impressao"
+                    className="checkInput1"
+                    type="checkbox"
+                    onChange={(e) =>
+                      setNewRep({
+                        ...newRep,
+                        fichaTecnica: { ...newRep.fichaTecnica, impressao: e.target.checked }
+                      })
+                    }
+                  />{' '}
+                  Impressão{' '}
                 </label>
                 <label className="label1" htmlFor="Comunicacao">
                   {' '}
-                  <input id="Comunicacao" className="checkInput1" type="checkbox" /> Comunicação
-                  {' '}
+                  <input
+                    checked={newRep.fichaTecnica.comunicacao}
+                    id="Comunicacao"
+                    className="checkInput1"
+                    type="checkbox"
+                    onChange={(e) =>
+                      setNewRep({
+                        ...newRep,
+                        fichaTecnica: { ...newRep.fichaTecnica, comunicacao: e.target.checked }
+                      })
+                    }
+                  />{' '}
+                  Comunicação{' '}
                 </label>
                 <label className="label1" htmlFor="NoBreak">
                   {' '}
-                  <input id="NoBreak" className="checkInput1" type="checkbox" /> NoBreak
-                  {' '}
+                  <input
+                    checked={newRep.fichaTecnica.noBreak}
+                    id="NoBreak"
+                    className="checkInput1"
+                    type="checkbox"
+                    onChange={(e) =>
+                      setNewRep({
+                        ...newRep,
+                        fichaTecnica: { ...newRep.fichaTecnica, noBreak: e.target.checked }
+                      })
+                    }
+                  />{' '}
+                  NoBreak{' '}
                 </label>
                 <label className="label1" htmlFor="BateriaCR2032">
                   {' '}
-                  <input id="BateriaCR2032" className="checkInput1" type="checkbox" /> Bateria CR2032
-                  {' '}
+                  <input
+                    checked={newRep.fichaTecnica.bateriaCR2032}
+                    id="BateriaCR2032"
+                    className="checkInput1"
+                    type="checkbox"
+                    onChange={(e) =>
+                      setNewRep({
+                        ...newRep,
+                        fichaTecnica: { ...newRep.fichaTecnica, bateriaCR2032: e.target.checked }
+                      })
+                    }
+                  />{' '}
+                  Bateria CR2032{' '}
                 </label>
               </div>
             </div>
 
-            <input type="text" className="input1" placeholder="Observações" />
+            <input
+              value={newRep.obs}
+              onChange={(e) => setNewRep({ ...newRep, observacoes: e.target.value })}
+              type="text"
+              className="input1"
+              placeholder="Observações"
+            />
 
             <div
               style={{
@@ -189,13 +393,12 @@ export default function RepCreator() {
                 gap: '20px'
               }}
             >
-              <button type="button" onClick={() => setUnlocked2(false)}>
+              <button style={{ width: '100px' }} type="button" onClick={() => setUnlocked2(false)}>
                 Voltar
               </button>
-              <button onClick={() => setUnlocked2(true)} type="button">
-                Iniciar Testes
+              <button style={{ width: '100px' }} onClick={() => console.log(newRep)} type="button">
+                Finalizar
               </button>
-              <button type="button">Registrar</button>
             </div>
           </form>
         </div>
