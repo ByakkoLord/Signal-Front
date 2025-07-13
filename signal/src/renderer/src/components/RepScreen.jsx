@@ -14,8 +14,12 @@ export default function Dashboard() {
       <Search />
       <div className='teste' style={{ display: 'flex', flexDirection: 'column', gap: 100, overflowY: 'auto', maxHeight: '80vh' }}>
 
-      <Reps />
-      <Reps />
+      <Reps status='waitingDelivery'/>
+      <Reps status='waitingDelivery2'/>
+      <Reps status='checkMarkgreen'/>
+      <Reps status='tool'/>
+      <Reps status='xmark'/>
+      <Reps status='addBox'/>
       </div>
       {creatorState && (<RepCreator />)}
     </div>

@@ -5,9 +5,46 @@ import checkMarkgreen from '../../assets/repsImages/check-mark-green.png'
 import tool from '../../assets/repsImages/tool.png'
 import waitingDelivery from '../../assets/repsImages/waiting-delivery.png'
 import waitingDelivery2 from '../../assets/repsImages/waiting-delivery2.png'
+import addBox from '../../assets/repsImages/addBox.png'
+
+import React, { useEffect, useState } from 'react'
 
 
-export default function Reps() {
+export default function Reps( { status } ) {
+  const [statusImage, setStatusImage] = useState(null)
+  const [statusText, setStatusText] = useState('')
+
+  useEffect(() => {
+    switch (status) {
+      case 'waitingDelivery':
+        setStatusImage(waitingDelivery)
+        setStatusText('Aguardando Análise')
+        break
+      case 'waitingDelivery2':
+        setStatusImage(waitingDelivery2)
+        setStatusText('Aguardando Fabricante')
+        break
+      case 'checkMarkgreen':
+        setStatusImage(checkMarkgreen)
+        setStatusText('Finalizado')
+        break
+      case 'tool':
+        setStatusImage(tool)
+        setStatusText('Em Manutenção')
+        break
+      case 'xmark':
+        setStatusImage(Xmark)
+        setStatusText('Não Aprovado')
+        break
+      case 'addBox':
+        setStatusImage(addBox)
+        setStatusText('Novo REP')
+        break
+      default:
+        setStatusImage(null)
+    }
+  }, [status])
+
   return (
     <div className="reps">
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
@@ -44,9 +81,9 @@ export default function Reps() {
           </div>
           
         </div>
-        <div style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', width: 170, height: 226, borderRadius: 10, backgroundColor: '#3f4f55', marginLeft: 'auto', display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <img width={100} src={waitingDelivery} alt="" />
-            <h3 style={{ textAlign: 'center' }}>Aguardando análise</h3>
+        <div style={{ userSelect: 'none', justifyContent: 'center', alignItems: 'center', display: 'flex', width: 170, height: 226, borderRadius: 10, backgroundColor: '#3f4f55', marginLeft: 'auto', flexDirection: 'column', gap: 10 }}>
+            <img width={100} src={statusImage} alt="" />
+            <h3 style={{ textAlign: 'center' }}>{statusText}</h3>
           </div>
       </div>
       <div
