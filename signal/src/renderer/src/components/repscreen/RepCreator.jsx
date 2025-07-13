@@ -1,19 +1,20 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext, use } from 'react'
 import { AppContext } from '../../../contexts/ClientContext'
 
 export default function RepCreator() {
-  const { setCreatorState } = useContext(AppContext)
+  const { setCreatorState, socket } = useContext(AppContext)
   const [serial, setSerial] = useState('')
   const [unlocked, setUnlocked] = useState(false)
   const [unlocked1, setUnlocked1] = useState(false)
   const [unlocked2, setUnlocked2] = useState(false)
   const [newRep, setNewRep] = useState({
     serialNumber: '',
-    clientName: '',
     equipmentModel: '',
     manufacturer: '',
+    clientName: '',
     obs: '',
     tecnico: 'Guilherme',
+    type: 'new',
     itensDelivery: {
       fonte: false,
       rolete: false,
@@ -31,8 +32,8 @@ export default function RepCreator() {
       bateriaCR2032: false
     }
   })
-  const verifySerial = (serial) => {
-    if (serial === '1') {
+  const verifySerial = () => {
+    if (newRep.serialNumber === '1') {
       console.log('Serial number is valid')
       setUnlocked(true)
     } else {
@@ -41,10 +42,18 @@ export default function RepCreator() {
     }
   }
   useEffect(() => {
-    verifySerial(serial)
-  }, [serial])
+    verifySerial()
+  }, [newRep.serialNumber])
 
-  return (
+  useEffect(() => {
+    const sendRep = () => {
+      socket.emit('sendRep', { newRep })
+      console.log('Enviando novo REP:', { newRep })
+    }
+    
+  }, [newRep])
+
+  return (  
     <>
       <div
         className="rep-creator"
@@ -56,9 +65,9 @@ export default function RepCreator() {
         <form className="unlocked">
           <h2>Adicionar novo relógio</h2>
           <input
+            value={newRep.serialNumber}
             className="input1"
-            value={serial}
-            onChange={(e) => setSerial(e.target.value)}
+            onChange={(e) => setNewRep({ ...newRep, serialNumber: e.target.value })}
             type="text"
             placeholder="Número de série"
           />
@@ -396,7 +405,7 @@ export default function RepCreator() {
               <button style={{ width: '100px' }} type="button" onClick={() => setUnlocked2(false)}>
                 Voltar
               </button>
-              <button style={{ width: '100px' }} onClick={() => console.log(newRep)} type="button">
+              <button style={{ width: '100px' }} onClick={() => sendRep()} type="button">
                 Finalizar
               </button>
             </div>
