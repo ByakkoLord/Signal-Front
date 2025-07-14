@@ -18,6 +18,7 @@ export function AppProvider({ children }) {
   const [loggedInUser, setLoggedInUser] = useState('asdasd')
   const [sidebarSelected, setSidebarSelected] = useState(1)
   const [creatorState, setCreatorState] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
 
   const socket = useMemo(() => {
     const newSocket = io(import.meta.env.VITE_SERVER_URL, {
@@ -69,7 +70,9 @@ export function AppProvider({ children }) {
         sidebarSelected,
         setSidebarSelected,
         creatorState,
-        setCreatorState
+        setCreatorState,
+        searchTerm,
+        setSearchTerm
       }}
     >
       {children}

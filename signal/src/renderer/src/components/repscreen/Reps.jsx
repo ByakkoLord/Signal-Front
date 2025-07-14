@@ -10,9 +10,12 @@ import addBox from '../../assets/repsImages/addBox.png'
 import React, { useEffect, useState } from 'react'
 
 
-export default function Reps( { status, serialNumber, model, client, itensArray } ) {
+export default function Reps( { status, serialNumber, model, client, itensArray, ficha_tecnica } ) {
   const [statusImage, setStatusImage] = useState(null)
   const [statusText, setStatusText] = useState('')
+
+  const ideal = Object.values(ficha_tecnica).every(v => v === false);
+
 
   useEffect(() => {
     switch (status) {
@@ -108,9 +111,14 @@ export default function Reps( { status, serialNumber, model, client, itensArray 
         >
           <h2>Defeito:</h2>
           <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt, voluptas laboriosam
-            in velit quibusdam nisi cumque beatae impedit modi rem quos aliquam exercitationem,
-            reiciendis dignissimos quae, cum fugit facilis iure!
+            {ficha_tecnica.biometriaDigital ? (<>Há um erro com a biometria <br></br></>) : null}
+            {ficha_tecnica.bateriaCR2032 ? (<>A bateria CR2032 está descarregada <br></br></>) : null}
+            {ficha_tecnica.comunicacao ? (<>Há um erro de comunicação <br></br></>) : null}
+            {ficha_tecnica.display ? (<>O display está com problemas <br></br></>) : null}
+            {ficha_tecnica.fonte ? (<>A fonte está com problemas <br></br></>) : null}
+            {ficha_tecnica.impressao ? (<>A impressão está com problemas <br></br></>) : null}
+            {ficha_tecnica.noBreak ? (<>O no-break está com problemas <br></br> </>) : null}
+            {ideal && ( <>Nenhum problema identificado</>)}
           </p>
         </div>
         <div

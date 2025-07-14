@@ -278,7 +278,7 @@ export default function RepCreator() {
                 alignItems: 'flex-end'
               }}
             >
-              <h3>Os seguintes itens estão funcionando?</h3>
+              <h3>Quais itens não estão funcionando?</h3>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                 <label className="label1" htmlFor="Fonte1">
                   {' '}

@@ -5,7 +5,7 @@ import Search from './repscreen/Search'
 import RepCreator from './repscreen/RepCreator'
 
 export default function Dashboard() {
-  const { creatorState, setCreatorState, socket } = useContext(AppContext)
+  const { creatorState, setCreatorState, socket, searchTerm, setSearchTerm } = useContext(AppContext)
   const [reps, setReps] = useState([])
 
   useEffect(() => {
@@ -30,16 +30,22 @@ export default function Dashboard() {
           maxHeight: '80vh'
         }}
       >
-        {reps.filter(rep => rep.status === '').map((rep, index) => (
-          <Reps
-            key={index}
-            status={rep.status}
-            serialNumber={rep.serial_number}
-            model={rep.equipment_model}
-            client={rep.client_name}
-            itensArray={rep.itens_delivery}
-          />
-        ))}
+        {reps
+          .filter(rep => {
+            if (searchTerm.trim() === '') return true
+            return rep.serial_number.includes(searchTerm)
+          })
+          .map((rep, index) => (
+            <Reps
+              key={index}
+              status={rep.status}
+              serialNumber={rep.serial_number}
+              model={rep.equipment_model}
+              client={rep.client_name}
+              itensArray={rep.itens_delivery}
+              ficha_tecnica={rep.ficha_tecnica}
+            />
+          ))}
       </div>
       {creatorState && <RepCreator />}
     </div>
