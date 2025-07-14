@@ -30,26 +30,35 @@ export default function RepCreator() {
       comunicacao: false,
       noBreak: false,
       bateriaCR2032: false
-    }
+    },
+    status: 'checkMarkgreen'
   })
   const verifySerial = () => {
-    if (newRep.serialNumber === '1') {
-      console.log('Serial number is valid')
-      setUnlocked(true)
-    } else {
-      console.log('Serial number is invalid')
-      setUnlocked(false)
-    }
+    socket.emit('verifySerial', { serialNumber: newRep.serialNumber })
+    console.log('Verificando número de série:', newRep.serialNumber)
+    socket.on('serialExists', (exists) => {
+      console.log('Serial number exists:', exists)
+      console.log('Serial number:', newRep.serialNumber)
+      if (!exists.exists) {
+          console.log('Serial number already exists')
+          setUnlocked(false)
+        }else {
+          console.log('Serial number is available')
+          setUnlocked(true)
+        }
+    })
   }
+
+  const sendRep = () => {
+      socket.emit('sendRep', { newRep })
+      console.log('Enviando novo REP:', { newRep })
+    }
   useEffect(() => {
     verifySerial()
   }, [newRep.serialNumber])
 
   useEffect(() => {
-    const sendRep = () => {
-      socket.emit('sendRep', { newRep })
-      console.log('Enviando novo REP:', { newRep })
-    }
+    
     
   }, [newRep])
 

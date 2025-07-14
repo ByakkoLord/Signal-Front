@@ -10,7 +10,7 @@ import addBox from '../../assets/repsImages/addBox.png'
 import React, { useEffect, useState } from 'react'
 
 
-export default function Reps( { status } ) {
+export default function Reps( { status, serialNumber, model, client, itensArray } ) {
   const [statusImage, setStatusImage] = useState(null)
   const [statusText, setStatusText] = useState('')
 
@@ -60,23 +60,23 @@ export default function Reps( { status } ) {
         />
         <div>
           <div style={{ backgroundColor: '#3f4f55', padding: 10, borderRadius: 10 }}>
-            <h4>Número de Série: 00014003750123456</h4>
-            <h4>Modelo: IdClass 671</h4>
-            <h4>Cliente: Texas Carnes</h4>
+            <h4>Número de Série: {serialNumber}</h4>
+            <h4>Modelo: {model}</h4>
+            <h4>Cliente: {client}</h4>
           </div>
 
           <div style={{ marginTop: 10, backgroundColor: '#3f4f55', padding: 10, borderRadius: 10 }}>
             <div className="reps-accessories">
-              <h4>Fonte</h4> <img width={16} height={16} src={checkmark} alt="" />
+              <h4>Fonte</h4> <img width={16} height={16} src={itensArray.fonte ? checkmark : Xmark} alt="" />
             </div>
             <div className="reps-accessories">
-              <h4>Nota fiscal</h4> <img width={16} height={16} src={checkmark} alt="" />
+              <h4>Nota fiscal</h4> <img width={16} height={16} src={itensArray.notaFiscal ? checkmark : Xmark} alt="" />
             </div>
             <div className="reps-accessories">
-              <h4>Rolete</h4> <img width={16} height={16} src={Xmark} alt="" />
+              <h4>Rolete</h4> <img width={16} height={16} src={itensArray.rolete ? checkmark : Xmark} alt="" />
             </div>
             <div className="reps-accessories">
-              <h4>Bobina</h4> <img width={16} height={16} src={Xmark} alt="" />
+              <h4>Bobina</h4> <img width={16} height={16} src={itensArray.bobina ? checkmark : Xmark} alt="" />
             </div>
           </div>
           
