@@ -105,7 +105,7 @@ export default function Tasks({ type, task }) {
       </h2>
       <p
         style={{
-          maxHeight: hover ? '100px' : '0',
+          maxHeight: hover ? '1000px' : '0',
           overflow: 'hidden',
           transition: 'max-height 0.3s ease'
         }}

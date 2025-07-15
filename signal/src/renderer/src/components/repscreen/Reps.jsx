@@ -6,6 +6,8 @@ import tool from '../../assets/repsImages/tool.png'
 import waitingDelivery from '../../assets/repsImages/waiting-delivery.png'
 import waitingDelivery2 from '../../assets/repsImages/waiting-delivery2.png'
 import addBox from '../../assets/repsImages/addBox.png'
+import history from '../../assets/repsImages/history.png'
+import deleter from '../../assets/repsImages/delete.png'
 
 import React, { useEffect, useState } from 'react'
 
@@ -50,19 +52,18 @@ export default function Reps( { status, serialNumber, model, client, itensArray,
 
   return (
     <div className="reps">
-      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 10 }}>
         <img
           style={{
             borderRadius: '10px',
-            marginRight: 20,
             boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
           }}
-          width={241}
+          width={230}
           src={repIdClass}
           alt="REP"
         />
         <div>
-          <div style={{ backgroundColor: '#3f4f55', padding: 10, borderRadius: 10 }}>
+          <div style={{ backgroundColor: '#3f4f55', padding: 10, borderRadius: 10, maxWidth: 330, maxHeight: 95, overflowY: 'auto'  }}>
             <h4>Número de Série: {serialNumber}</h4>
             <h4>Modelo: {model}</h4>
             <h4>Cliente: {client}</h4>
@@ -89,6 +90,7 @@ export default function Reps( { status, serialNumber, model, client, itensArray,
             <h3 style={{ textAlign: 'center' }}>{statusText}</h3>
           </div>
       </div>
+      
       <div
         style={{
           gap: 20,
@@ -98,19 +100,20 @@ export default function Reps( { status, serialNumber, model, client, itensArray,
           marginTop: 10
         }}
       >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+        <div style={{ display: 'flex', flexDirection: 'row', gap: 10, justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
           <div
           style={{
-            overflowY: 'hidden',
-            maxHeight: 120,
-            marginTop: 20,
+            overflowY: 'auto',
+            minHeight: 230,
+            maxHeight: 230,
+            flex: 1,
             backgroundColor: '#3f4f55',
             padding: 10,
             borderRadius: 10
           }}
         >
           <h2>Defeito:</h2>
-          <p style={{ overflowY: 'auto', height: 60 }}>
+          <p style={{ overflowY: 'auto', maxHeight: 75 }}>
             {ficha_tecnica.biometriaDigital ? (<>Há um erro com a biometria <br></br></>) : null}
             {ficha_tecnica.bateriaCR2032 ? (<>A bateria CR2032 está descarregada <br></br></>) : null}
             {ficha_tecnica.comunicacao ? (<>Há um erro de comunicação <br></br></>) : null}
@@ -124,8 +127,9 @@ export default function Reps( { status, serialNumber, model, client, itensArray,
         <div
           style={{
             overflowY: 'auto',
-            maxHeight: 120,
-            marginTop: 10,
+            minHeight: 230,
+            maxHeight: 230,
+            flex: 1,
             backgroundColor: '#3f4f55',
             padding: 10,
             borderRadius: 10
@@ -136,54 +140,23 @@ export default function Reps( { status, serialNumber, model, client, itensArray,
             {obs ? obs : 'Nenhuma observação registrada.'}
           </p>
         </div>
+        <div style={{ gap: 10, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', }}>
+        <button style={{width: 70, height: 70, borderRadius: 10, backgroundColor: '#164b5eff', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+          <img width={40} height={40} src={history} alt="" />
+        </button>
+         <button style={{width: 70, height: 70, borderRadius: 10, backgroundColor: '#164b5eff', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+          <img width={40} height={40} src={deleter} alt="" />
+        </button>
+        <button style={{width: 70, height: 70, borderRadius: 10, backgroundColor: '#164b5eff', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+          <img width={40} height={40} src={tool} alt="" />
+        </button>
+      </div>
         </div>
         
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            
-            maxHeight: 210,
-            marginTop: 20,
-            minWidth: 300,
-            backgroundColor: '#3f4f55',
-            gap: 10,
-            padding: 10,
-            borderRadius: 10
-          }}
-        >
-          <h2>Histórico:</h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, overflowY: 'auto' }}>
-
-          <div
-            style={{
-              overflow: 'hidden',
-              maxHeight: 100,
-              maxWidth: 450,
-              minHeight: 60,
-              background: 'linear-gradient(to right,rgb(64, 117, 140), #2c3e50)',
-              padding: 10,
-              borderRadius: 10
-            }}
-          >
-            <p style={{ overflowY: 'auto', height: 40, overflowX: 'hidden' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit  Lorem ipsum dolor sit amet, consectetur adipiscing elit  Lorem ipsum dolor sit amet, consectetur adipiscing elit  Lorem ipsum dolor sit amet, consectetur adipiscing elit  Lorem ipsum dolor sit amet, consectetur adipiscing elit  Lorem ipsum dolor sit amet, consectetur adipiscing elit </p>
-          </div>
-          <div
-            style={{
-               overflow: 'hidden',
-              maxHeight: 100,
-              maxWidth: 450,
-              minHeight: 60,
-              background: 'linear-gradient(to right,rgb(64, 117, 140), #2c3e50)',
-              padding: 10,
-              borderRadius: 10
-            }}
-          >
-            <p style={{ overflowY: 'auto', height: 40, overflowX: 'hidden' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-          </div>
-          <p></p>
-        </div>
+       
+         
+   
+        
       </div>
     </div>
   )

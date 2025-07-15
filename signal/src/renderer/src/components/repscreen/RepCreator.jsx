@@ -3,7 +3,7 @@ import { AppContext } from '../../../contexts/ClientContext'
 
 export default function RepCreator() {
   const { setCreatorState, socket } = useContext(AppContext)
-  const [serial, setSerial] = useState('')
+  const [repExists, setRepExists] = useState(false)
   const [unlocked, setUnlocked] = useState(false)
   const [unlocked1, setUnlocked1] = useState(false)
   const [unlocked2, setUnlocked2] = useState(false)
@@ -31,6 +31,17 @@ export default function RepCreator() {
       noBreak: false,
       bateriaCR2032: false
     },
+    history: {
+      visit: 2,
+      createdAt: new Date(),
+      fonte: false,
+      display: false,
+      biometriaDigital: false,
+      impressao: false,
+      comunicacao: false,
+      noBreak: false,
+      bateriaCR2032: false
+    },
     status: 'checkMarkgreen'
   })
   const verifySerial = () => {
@@ -40,29 +51,51 @@ export default function RepCreator() {
       console.log('Serial number exists:', exists)
       console.log('Serial number:', newRep.serialNumber)
       if (!exists.exists) {
-          console.log('Serial number already exists')
-          setUnlocked(false)
-        }else {
-          console.log('Serial number is available')
-          setUnlocked(true)
-        }
+        console.log('Serial number already exists')
+        setUnlocked(false)
+      } else {
+        console.log('Serial number is available')
+        setUnlocked(true)
+      }
     })
   }
 
   const sendRep = () => {
-      socket.emit('sendRep', { newRep })
-      console.log('Enviando novo REP:', { newRep })
-    }
+    socket.emit('verifyHistory', { serialNumber: newRep.serialNumber })
+
+    socket.once('historyValue', (response) => {
+      console.log('History value:', response)
+
+      const teste = true
+
+      if (teste) {
+        const visitAtual = parseInt(response, 10)
+        console.log('Visit atual:', visitAtual)
+        const novoHistory = {
+          ...newRep.history,
+          visit: isNaN(visitAtual) ? 3 : visitAtual + 1,
+          createdAt: new Date()
+        }
+
+        const repAtualizado = { ...newRep, history: novoHistory }
+
+        socket.emit('sendRep', { newRep: repAtualizado })
+        console.log('Novo history visit:', novoHistory.visit)
+        console.log('Enviando REP já cadastrado:', repAtualizado)
+      } else {
+        socket.emit('sendRep', { newRep })
+        console.log('Enviando novo REP:', newRep)
+      }
+    })
+  }
+
   useEffect(() => {
     verifySerial()
   }, [newRep.serialNumber])
 
-  useEffect(() => {
-    
-    
-  }, [newRep])
+  useEffect(() => {}, [newRep])
 
-  return (  
+  return (
     <>
       <div
         className="rep-creator"
@@ -238,13 +271,6 @@ export default function RepCreator() {
                 Sem caixa
               </label>
             </div>
-            <input
-              value={newRep.obs}
-              onChange={(e) => setNewRep({ ...newRep, observacoes: e.target.value })}
-              type="text"
-              className="input1"
-              placeholder="Observações"
-            />
 
             <div
               style={{
@@ -394,15 +420,13 @@ export default function RepCreator() {
                 </label>
               </div>
             </div>
-
             <input
               value={newRep.obs}
-              onChange={(e) => setNewRep({ ...newRep, observacoes: e.target.value })}
+              onChange={(e) => setNewRep({ ...newRep, obs: e.target.value })}
               type="text"
               className="input1"
               placeholder="Observações"
             />
-
             <div
               style={{
                 display: 'flex',
@@ -414,7 +438,14 @@ export default function RepCreator() {
               <button style={{ width: '100px' }} type="button" onClick={() => setUnlocked2(false)}>
                 Voltar
               </button>
-              <button style={{ width: '100px' }} onClick={() => sendRep()} type="button">
+              <button
+                style={{ width: '100px' }}
+                onClick={() => {
+                  sendRep()
+                  setCreatorState(false)
+                }}
+                type="button"
+              >
                 Finalizar
               </button>
             </div>
