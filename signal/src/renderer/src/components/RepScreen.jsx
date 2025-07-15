@@ -44,6 +44,7 @@ export default function Dashboard() {
               client={rep.client_name}
               itensArray={rep.itens_delivery}
               ficha_tecnica={rep.ficha_tecnica}
+              obs={rep.obs}
             />
           ))}
       </div>

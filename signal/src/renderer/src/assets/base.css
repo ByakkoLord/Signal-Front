@@ -474,7 +474,6 @@ main {
   background: linear-gradient(to right, #354B53, #5A6B73);
   border-radius: 20px;
   flex-direction: column;
-  gap: 10px;
 }
 
 .reps-accessories {

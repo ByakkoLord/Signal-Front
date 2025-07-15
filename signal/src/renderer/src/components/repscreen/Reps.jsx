@@ -10,7 +10,7 @@ import addBox from '../../assets/repsImages/addBox.png'
 import React, { useEffect, useState } from 'react'
 
 
-export default function Reps( { status, serialNumber, model, client, itensArray, ficha_tecnica } ) {
+export default function Reps( { status, serialNumber, model, client, itensArray, ficha_tecnica, obs } ) {
   const [statusImage, setStatusImage] = useState(null)
   const [statusText, setStatusText] = useState('')
 
@@ -95,14 +95,14 @@ export default function Reps( { status, serialNumber, model, client, itensArray,
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
-          marginTop: 20
+          marginTop: 10
         }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
           <div
           style={{
-            overflowY: 'auto',
-            maxHeight: 80,
+            overflowY: 'hidden',
+            maxHeight: 120,
             marginTop: 20,
             backgroundColor: '#3f4f55',
             padding: 10,
@@ -110,7 +110,7 @@ export default function Reps( { status, serialNumber, model, client, itensArray,
           }}
         >
           <h2>Defeito:</h2>
-          <p>
+          <p style={{ overflowY: 'auto', height: 60 }}>
             {ficha_tecnica.biometriaDigital ? (<>Há um erro com a biometria <br></br></>) : null}
             {ficha_tecnica.bateriaCR2032 ? (<>A bateria CR2032 está descarregada <br></br></>) : null}
             {ficha_tecnica.comunicacao ? (<>Há um erro de comunicação <br></br></>) : null}
@@ -124,18 +124,16 @@ export default function Reps( { status, serialNumber, model, client, itensArray,
         <div
           style={{
             overflowY: 'auto',
-            maxHeight: 80,
-            marginTop: 20,
+            maxHeight: 120,
+            marginTop: 10,
             backgroundColor: '#3f4f55',
             padding: 10,
             borderRadius: 10
           }}
         >
-          <h2>Obsercações:</h2>
+          <h2>Observações:</h2>
           <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt, voluptas laboriosam
-            in velit quibusdam nisi cumque beatae impedit modi rem quos aliquam exercitationem,
-            reiciendis dignissimos quae, cum fugit facilis iure!
+            {obs ? obs : 'Nenhuma observação registrada.'}
           </p>
         </div>
         </div>
@@ -145,7 +143,7 @@ export default function Reps( { status, serialNumber, model, client, itensArray,
             display: 'flex',
             flexDirection: 'column',
             
-            maxHeight: 200,
+            maxHeight: 210,
             marginTop: 20,
             minWidth: 300,
             backgroundColor: '#3f4f55',
@@ -159,21 +157,29 @@ export default function Reps( { status, serialNumber, model, client, itensArray,
 
           <div
             style={{
+              overflow: 'hidden',
+              maxHeight: 100,
+              maxWidth: 450,
+              minHeight: 60,
               background: 'linear-gradient(to right,rgb(64, 117, 140), #2c3e50)',
               padding: 10,
               borderRadius: 10
             }}
           >
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <p style={{ overflowY: 'auto', height: 40, overflowX: 'hidden' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit  Lorem ipsum dolor sit amet, consectetur adipiscing elit  Lorem ipsum dolor sit amet, consectetur adipiscing elit  Lorem ipsum dolor sit amet, consectetur adipiscing elit  Lorem ipsum dolor sit amet, consectetur adipiscing elit  Lorem ipsum dolor sit amet, consectetur adipiscing elit </p>
           </div>
           <div
             style={{
+               overflow: 'hidden',
+              maxHeight: 100,
+              maxWidth: 450,
+              minHeight: 60,
               background: 'linear-gradient(to right,rgb(64, 117, 140), #2c3e50)',
               padding: 10,
               borderRadius: 10
             }}
           >
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <p style={{ overflowY: 'auto', height: 40, overflowX: 'hidden' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           </div>
           </div>
           <p></p>
