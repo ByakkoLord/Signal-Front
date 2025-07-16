@@ -7,9 +7,12 @@ import waitingDelivery from '../../assets/repsImages/waiting-delivery.png'
 import waitingDelivery2 from '../../assets/repsImages/waiting-delivery2.png'
 import addBox from '../../assets/repsImages/addBox.png'
 import history from '../../assets/repsImages/history.png'
-import deleter from '../../assets/repsImages/delete.png'
+import bill from '../../assets/repsImages/bill.png'
+import historyIcon from '../../assets/history.png'
+import NFEScreen from './nfScreen'
 
 import React, { useEffect, useState } from 'react'
+
 
 export default function Reps({
   status,
@@ -22,6 +25,7 @@ export default function Reps({
 }) {
   const [statusImage, setStatusImage] = useState(null)
   const [statusText, setStatusText] = useState('')
+  const [nfeVisible, setNfeVisible] = useState(true)
 
   const ideal = Object.values(ficha_tecnica).every((v) => v === false)
 
@@ -246,7 +250,7 @@ export default function Reps({
                 justifyContent: 'center'
               }}
             >
-              <img width={40} height={40} src={deleter} alt="" />
+              <img width={40} height={40} src={historyIcon} alt="" />
             </button>
             <div
               style={{
@@ -266,6 +270,11 @@ export default function Reps({
           </div>
         </div>
       </div>
+              {nfeVisible && (
+                <>
+                  <NFEScreen />
+                </>
+              )}
     </div>
   )
 }
