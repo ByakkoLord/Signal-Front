@@ -6,12 +6,13 @@ import tool from '../../assets/repsImages/tool.png'
 import waitingDelivery from '../../assets/repsImages/waiting-delivery.png'
 import waitingDelivery2 from '../../assets/repsImages/waiting-delivery2.png'
 import addBox from '../../assets/repsImages/addBox.png'
-import history from '../../assets/repsImages/history.png'
+import nfeIcon from '../../assets/repsImages/history.png'
 import bill from '../../assets/repsImages/bill.png'
 import historyIcon from '../../assets/history.png'
-import NFEScreen from './nfScreen'
+import NFEScreen from './NFScreen'
+import { AppContext } from '../../../contexts/ClientContext'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 
 
 export default function Reps({
@@ -25,7 +26,8 @@ export default function Reps({
 }) {
   const [statusImage, setStatusImage] = useState(null)
   const [statusText, setStatusText] = useState('')
-  const [nfeVisible, setNfeVisible] = useState(true)
+  const { nfeVisible, setNfeVisible } = useContext(AppContext)
+
 
   const ideal = Object.values(ficha_tecnica).every((v) => v === false)
 
@@ -233,8 +235,9 @@ export default function Reps({
                 alignItems: 'center',
                 justifyContent: 'center'
               }}
+              onClick={() => setNfeVisible(true)}
             >
-              <img width={40} height={40} src={history} alt="" />
+              <img width={40} height={40} src={nfeIcon} alt="" />
             </button>
             <button
               className="rep-button"
