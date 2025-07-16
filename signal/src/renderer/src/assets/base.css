@@ -594,6 +594,13 @@ main {
   transform: scale(1.1);
 }
 
+.rep-button:hover {
+  background-color: #7e8b91;
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+ 
+}
+
 .unlocked1 {
   position: absolute;
   transform: translate(-50%, -50%);

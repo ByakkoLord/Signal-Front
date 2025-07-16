@@ -11,13 +11,19 @@ import deleter from '../../assets/repsImages/delete.png'
 
 import React, { useEffect, useState } from 'react'
 
-
-export default function Reps( { status, serialNumber, model, client, itensArray, ficha_tecnica, obs } ) {
+export default function Reps({
+  status,
+  serialNumber,
+  model,
+  client,
+  itensArray,
+  ficha_tecnica,
+  obs
+}) {
   const [statusImage, setStatusImage] = useState(null)
   const [statusText, setStatusText] = useState('')
 
-  const ideal = Object.values(ficha_tecnica).every(v => v === false);
-
+  const ideal = Object.values(ficha_tecnica).every((v) => v === false)
 
   useEffect(() => {
     switch (status) {
@@ -63,7 +69,16 @@ export default function Reps( { status, serialNumber, model, client, itensArray,
           alt="REP"
         />
         <div>
-          <div style={{ backgroundColor: '#3f4f55', padding: 10, borderRadius: 10, maxWidth: 330, maxHeight: 95, overflowY: 'auto'  }}>
+          <div
+            style={{
+              backgroundColor: '#3f4f55',
+              padding: 10,
+              borderRadius: 10,
+              maxWidth: 330,
+              maxHeight: 95,
+              overflowY: 'auto'
+            }}
+          >
             <h4>Número de Série: {serialNumber}</h4>
             <h4>Modelo: {model}</h4>
             <h4>Cliente: {client}</h4>
@@ -71,26 +86,43 @@ export default function Reps( { status, serialNumber, model, client, itensArray,
 
           <div style={{ marginTop: 10, backgroundColor: '#3f4f55', padding: 10, borderRadius: 10 }}>
             <div className="reps-accessories">
-              <h4>Fonte</h4> <img width={16} height={16} src={itensArray.fonte ? checkmark : Xmark} alt="" />
+              <h4>Fonte</h4>{' '}
+              <img width={16} height={16} src={itensArray.fonte ? checkmark : Xmark} alt="" />
             </div>
             <div className="reps-accessories">
-              <h4>Nota fiscal</h4> <img width={16} height={16} src={itensArray.notaFiscal ? checkmark : Xmark} alt="" />
+              <h4>Nota fiscal</h4>{' '}
+              <img width={16} height={16} src={itensArray.notaFiscal ? checkmark : Xmark} alt="" />
             </div>
             <div className="reps-accessories">
-              <h4>Rolete</h4> <img width={16} height={16} src={itensArray.rolete ? checkmark : Xmark} alt="" />
+              <h4>Rolete</h4>{' '}
+              <img width={16} height={16} src={itensArray.rolete ? checkmark : Xmark} alt="" />
             </div>
             <div className="reps-accessories">
-              <h4>Bobina</h4> <img width={16} height={16} src={itensArray.bobina ? checkmark : Xmark} alt="" />
+              <h4>Bobina</h4>{' '}
+              <img width={16} height={16} src={itensArray.bobina ? checkmark : Xmark} alt="" />
             </div>
           </div>
-          
         </div>
-        <div style={{ userSelect: 'none', justifyContent: 'center', alignItems: 'center', display: 'flex', width: 170, height: 226, borderRadius: 10, backgroundColor: '#3f4f55', marginLeft: 'auto', flexDirection: 'column', gap: 10 }}>
-            <img width={100} src={statusImage} alt="" />
-            <h3 style={{ textAlign: 'center' }}>{statusText}</h3>
-          </div>
+        <div
+          style={{
+            userSelect: 'none',
+            justifyContent: 'center',
+            alignItems: 'center',
+            display: 'flex',
+            width: 170,
+            height: 226,
+            borderRadius: 10,
+            backgroundColor: '#3f4f55',
+            marginLeft: 'auto',
+            flexDirection: 'column',
+            gap: 10
+          }}
+        >
+          <img width={100} src={statusImage} alt="" />
+          <h3 style={{ textAlign: 'center' }}>{statusText}</h3>
+        </div>
       </div>
-      
+
       <div
         style={{
           gap: 20,
@@ -100,63 +132,139 @@ export default function Reps( { status, serialNumber, model, client, itensArray,
           marginTop: 10
         }}
       >
-        <div style={{ display: 'flex', flexDirection: 'row', gap: 10, justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
-          <div
-          style={{
-            overflowY: 'auto',
-            minHeight: 230,
-            maxHeight: 230,
-            flex: 1,
-            backgroundColor: '#3f4f55',
-            padding: 10,
-            borderRadius: 10
-          }}
-        >
-          <h2>Defeito:</h2>
-          <p style={{ overflowY: 'auto', maxHeight: 75 }}>
-            {ficha_tecnica.biometriaDigital ? (<>Há um erro com a biometria <br></br></>) : null}
-            {ficha_tecnica.bateriaCR2032 ? (<>A bateria CR2032 está descarregada <br></br></>) : null}
-            {ficha_tecnica.comunicacao ? (<>Há um erro de comunicação <br></br></>) : null}
-            {ficha_tecnica.display ? (<>O display está com problemas <br></br></>) : null}
-            {ficha_tecnica.fonte ? (<>A fonte está com problemas <br></br></>) : null}
-            {ficha_tecnica.impressao ? (<>A impressão está com problemas <br></br></>) : null}
-            {ficha_tecnica.noBreak ? (<>O no-break está com problemas <br></br> </>) : null}
-            {ideal && ( <>Nenhum problema identificado</>)}
-          </p>
-        </div>
         <div
           style={{
-            overflowY: 'auto',
-            minHeight: 230,
-            maxHeight: 230,
-            flex: 1,
-            backgroundColor: '#3f4f55',
-            padding: 10,
-            borderRadius: 10
+            display: 'flex',
+            flexDirection: 'row',
+            gap: 10,
+            justifyContent: 'space-between',
+            width: '100%',
+            alignItems: 'center'
           }}
         >
-          <h2>Observações:</h2>
-          <p>
-            {obs ? obs : 'Nenhuma observação registrada.'}
-          </p>
+          <div
+            style={{
+              overflowY: 'auto',
+              minHeight: 230,
+              maxHeight: 230,
+              flex: 1,
+              backgroundColor: '#3f4f55',
+              padding: 10,
+              borderRadius: 10
+            }}
+          >
+            <h2>Defeito:</h2>
+            <p style={{ overflowY: 'auto', maxHeight: 75 }}>
+              {ficha_tecnica.biometriaDigital ? (
+                <>
+                  Há um erro com a biometria <br></br>
+                </>
+              ) : null}
+              {ficha_tecnica.bateriaCR2032 ? (
+                <>
+                  A bateria CR2032 está descarregada <br></br>
+                </>
+              ) : null}
+              {ficha_tecnica.comunicacao ? (
+                <>
+                  Há um erro de comunicação <br></br>
+                </>
+              ) : null}
+              {ficha_tecnica.display ? (
+                <>
+                  O display está com problemas <br></br>
+                </>
+              ) : null}
+              {ficha_tecnica.fonte ? (
+                <>
+                  A fonte está com problemas <br></br>
+                </>
+              ) : null}
+              {ficha_tecnica.impressao ? (
+                <>
+                  A impressão está com problemas <br></br>
+                </>
+              ) : null}
+              {ficha_tecnica.noBreak ? (
+                <>
+                  O no-break está com problemas <br></br>{' '}
+                </>
+              ) : null}
+              {ideal && <>Nenhum problema identificado</>}
+            </p>
+          </div>
+          <div
+            style={{
+              overflowY: 'auto',
+              minHeight: 230,
+              maxHeight: 230,
+              flex: 1,
+              backgroundColor: '#3f4f55',
+              padding: 10,
+              borderRadius: 10
+            }}
+          >
+            <h2>Observações:</h2>
+            <p>{obs ? obs : 'Nenhuma observação registrada.'}</p>
+          </div>
+          <div
+            style={{
+              gap: 10,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'column'
+            }}
+          >
+            <button
+              className="rep-button"
+              style={{
+                width: 70,
+                height: 70,
+                borderRadius: 10,
+                backgroundColor: '#164b5eff',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <img width={40} height={40} src={history} alt="" />
+            </button>
+            <button
+              className="rep-button"
+              style={{
+                width: 70,
+                height: 70,
+                borderRadius: 10,
+                backgroundColor: '#164b5eff',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <img width={40} height={40} src={deleter} alt="" />
+            </button>
+            <div
+              style={{
+                width: 70,
+                height: 70,
+                borderRadius: 10,
+                backgroundColor: '#293c44ff',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <h1>1</h1>
+            </div>
+          </div>
         </div>
-        <div style={{ gap: 10, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', }}>
-        <button style={{width: 70, height: 70, borderRadius: 10, backgroundColor: '#164b5eff', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-          <img width={40} height={40} src={history} alt="" />
-        </button>
-         <button style={{width: 70, height: 70, borderRadius: 10, backgroundColor: '#164b5eff', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-          <img width={40} height={40} src={deleter} alt="" />
-        </button>
-        <button style={{width: 70, height: 70, borderRadius: 10, backgroundColor: '#164b5eff', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-          <img width={40} height={40} src={tool} alt="" />
-        </button>
-      </div>
-        </div>
-        
-       
-         
-   
-        
       </div>
     </div>
   )
