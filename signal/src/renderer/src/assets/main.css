@@ -54,3 +54,18 @@ label:hover {
   cursor: pointer;
   transform: scale(1.02);
 }
+
+h6 {
+  margin-top: 10px;
+  padding: 0;
+  font-size: 0.9rem;
+  font-weight: normal;
+  color: #d0c7c7;
+  transition: all 0.3s ease;
+}
+
+h6:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  color: #00aaff;
+}

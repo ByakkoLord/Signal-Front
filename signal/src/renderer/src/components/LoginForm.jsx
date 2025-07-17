@@ -6,6 +6,9 @@ export default function LoginForm() {
   const [password, setPassword] = useState('')
   const { setLoggedIn, socket, setLoggedInUser, loggedInUser } = useAppContext()
     const [loading, setLoading] = useState(false)
+    const [createUser, setCreateUser] = useState(false)
+    const [newUsername, setNewUsername] = useState('')
+    const [newPassword, setNewPassword] = useState('')
 
   useEffect(() => {
     socket.on('loginResponse', (data) => {
@@ -14,7 +17,6 @@ export default function LoginForm() {
         console.log(data)
         
         console.log('Usuário logado:', loggedInUser)
-        // só  pra ficar bunitinho
         setTimeout(() => {
             setLoading(false)
             setLoggedIn(true)
@@ -36,6 +38,14 @@ export default function LoginForm() {
     socket.emit('login', { username, password })
     console.log('Login request sent:', { username, password })
 
+  }
+
+  const handleCreateUser = (e) => {
+    e.preventDefault()
+    setLoading(true)
+
+    socket.emit('createUser', { username: newUsername, password: newPassword })
+    console.log('Create user request sent:', { username: newUsername, password: newPassword })
   }
 
   return (
@@ -77,7 +87,7 @@ export default function LoginForm() {
             </div>
           </div>
         </main>
-      ) : (
+      ) : !createUser ? (
         <div
           style={{
             height: '90vh',
@@ -149,6 +159,80 @@ export default function LoginForm() {
               Login
             </button>
           </form>
+          <h6 onClick={() => setCreateUser(true)}>Ainda não tem uma conta?</h6>
+        </div>
+      ) : (
+        <div
+          style={{
+            height: '90vh',
+            width: '100vw',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <form
+            className="login-form"
+            
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: 250,
+              width: 300,
+              backgroundColor: '#f0f0f0',
+              borderRadius: 10
+            }}
+          >
+            <h1 style={{ marginBottom: 20 }}>Criar Conta</h1>
+
+            <input
+              value={newUsername}
+              onChange={(e) => setNewUsername(e.target.value)}
+              style={{
+                marginBottom: 10,
+                width: '80%',
+                border: 'none',
+                borderRadius: 5,
+                padding: 8,
+                outline: 'none'
+              }}
+              type="text"
+              placeholder="Usuário"
+            />
+            <input
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              style={{
+                marginBottom: 10,
+                width: '80%',
+                border: 'none',
+                borderRadius: 5,
+                padding: 8,
+                outline: 'none'
+              }}
+              type="password"
+              placeholder="Senha"
+            />
+            <button
+              style={{
+                marginTop: 10,
+                padding: 8,
+                borderRadius: 5,
+                border: 'none',
+                backgroundColor: '#4c6067',
+                color: 'white',
+                cursor: 'pointer',
+                width: '80%'
+              }}
+              onClick={handleCreateUser}
+            >
+              Criar Conta
+            </button>
+          </form>
+          <h6 onClick={() => setCreateUser(false)}>Já tem uma conta?</h6>
         </div>
       )}
     </>

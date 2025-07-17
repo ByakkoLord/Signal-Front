@@ -19,11 +19,6 @@ export default function Search() {
       >
         <img width={20} height={20} src={addBox} alt="Search" />
       </button>
-      <button
-        style={{ width: 40, height: 40, borderRadius: 10, border: 'none', cursor: 'pointer' }}
-      >
-        <img width={20} height={20} src={pen} alt="Search" />
-      </button>
     </div>
   )
 }

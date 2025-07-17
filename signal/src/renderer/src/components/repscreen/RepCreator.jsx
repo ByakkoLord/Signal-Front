@@ -3,6 +3,7 @@ import { AppContext } from '../../../contexts/ClientContext'
 
 export default function RepCreator() {
   const { setCreatorState, socket } = useContext(AppContext)
+  const [zstatus, setZstatus] = useState(null)
   const [repExists, setRepExists] = useState(false)
   const [unlocked, setUnlocked] = useState(false)
   const [unlocked1, setUnlocked1] = useState(false)
@@ -73,11 +74,13 @@ export default function RepCreator() {
         console.log('Visit atual:', visitAtual)
         const novoHistory = {
           ...newRep.history,
-          visit: isNaN(visitAtual) ? 3 : visitAtual + 1,
+          visit: isNaN(visitAtual) ? 1 : visitAtual + 1,
           createdAt: new Date()
         }
 
-        const repAtualizado = { ...newRep, history: novoHistory }
+        const novoStatus = 'waitingDelivery'
+
+        const repAtualizado = { ...newRep, history: novoHistory, status: novoStatus }
 
         socket.emit('sendRep', { newRep: repAtualizado })
         console.log('Novo history visit:', novoHistory.visit)
@@ -286,7 +289,19 @@ export default function RepCreator() {
               <button onClick={() => setUnlocked2(true)} type="button">
                 Iniciar Testes
               </button>
-              <button type="button">Registrar</button>
+              <button
+                onClick={() => {
+                  setZstatus('waitingDelivery')
+                  console.log(zstatus)
+                  setTimeout(() => {
+                    sendRep()
+                  }, 1000)
+                  setCreatorState(false)
+                }}
+                type="button"
+              >
+                Registrar
+              </button>
             </div>
           </form>
         </div>

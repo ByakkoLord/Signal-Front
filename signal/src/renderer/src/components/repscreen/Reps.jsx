@@ -26,12 +26,19 @@ export default function Reps({
 }) {
   const [statusImage, setStatusImage] = useState(null)
   const [statusText, setStatusText] = useState('')
-  const { nfeVisible, setNfeVisible } = useContext(AppContext)
-
+  const { nfeVisible, setNfeVisible, socket } = useContext(AppContext)
+  const [hisValue, setHisValue] = useState(null)
 
   const ideal = Object.values(ficha_tecnica).every((v) => v === false)
 
   useEffect(() => {
+
+     socket.emit('verifyHistory', { serialNumber: serialNumber })
+
+    socket.once('historyValue', (response) => {
+      console.log('History value:', response)
+      setHisValue(response)
+    })
     switch (status) {
       case 'waitingDelivery':
         setStatusImage(waitingDelivery)
@@ -268,7 +275,7 @@ export default function Reps({
                 justifyContent: 'center'
               }}
             >
-              <h1>1</h1>
+              <h1>{hisValue}</h1>
             </div>
           </div>
         </div>
