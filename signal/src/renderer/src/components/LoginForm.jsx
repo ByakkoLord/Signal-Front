@@ -1,5 +1,6 @@
-import { use, useEffect, useState } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { useAppContext } from '../../contexts/ClientContext'
+import Message from './messages/Message'
 
 export default function LoginForm() {
   const [username, setUsername] = useState('')
@@ -9,6 +10,9 @@ export default function LoginForm() {
     const [createUser, setCreateUser] = useState(false)
     const [newUsername, setNewUsername] = useState('')
     const [newPassword, setNewPassword] = useState('')
+    const [showError, setShowError] = useState(false)
+
+    const timeoutRef = useRef(null)
 
   useEffect(() => {
     socket.on('loginResponse', (data) => {
@@ -27,7 +31,37 @@ export default function LoginForm() {
         setLoading(false)
       }
     })
+
+    socket.on('createdUser', (data) => {
+      if (data.success) {
+        console.log('User created successfully')
+        setCreateUser(false)
+        
+      } else {
+        console.error('User creation failed')
+      }
+    })
+
+    socket.on('userExists', (data) => {
+      if (data.exists) {
+        setShowError(true)
+        setLoading(false)
+        console.error('User already exists')
+      }
+    })
   }, [])
+
+  useEffect(() => {
+    if (showError) {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+      timeoutRef.current = setTimeout(() => {
+        setShowError(false)
+        }, 3000)
+      setLoading(false)
+    }
+  }, [showError])
 
   const handleLogin = (e) => {
     setLoggedInUser(username)
@@ -46,6 +80,7 @@ export default function LoginForm() {
 
     socket.emit('createUser', { username: newUsername, password: newPassword })
     console.log('Create user request sent:', { username: newUsername, password: newPassword })
+    
   }
 
   return (
@@ -160,6 +195,7 @@ export default function LoginForm() {
             </button>
           </form>
           <h6 onClick={() => setCreateUser(true)}>Ainda não tem uma conta?</h6>
+          {showError && (<Message message="Por favor, faça login ou crie uma conta." error={true}/>)}
         </div>
       ) : (
         <div
@@ -233,6 +269,7 @@ export default function LoginForm() {
             </button>
           </form>
           <h6 onClick={() => setCreateUser(false)}>Já tem uma conta?</h6>
+          {showError && (<Message message="Por favor, faça login ou crie uma conta." error={true}/>)}
         </div>
       )}
     </>

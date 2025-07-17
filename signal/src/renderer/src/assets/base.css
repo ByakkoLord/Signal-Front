@@ -648,3 +648,13 @@ main {
   background-color: #7e8b91;
   transform: scale(1.1);
 }
+
+.message {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 1000;
+}
