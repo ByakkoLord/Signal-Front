@@ -275,7 +275,7 @@ export default function Reps({
       </div>
               {nfeVisible && (
                 <>
-                  <NFEScreen />
+                  <NFEScreen serialNumber={serialNumber} />
                 </>
               )}
     </div>
