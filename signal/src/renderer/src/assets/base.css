@@ -564,6 +564,64 @@ main {
   background-color: #3f2222;
 }
 
+.input-group {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-direction: column;
+  width: 120px;
+  height: 40px;
+  background-color:  #291818;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  z-index: 1000;
+}
+
+.input-group:hover {
+  background-color: #3f2222;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.input-group h4 {
+  color: rgb(96, 95, 95);
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+
+.input-group-list{
+  display: flex;
+  margin-top: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #1e3842;
+  border-radius: 10px;
+  padding: 5px;
+  gap: 5px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 200px;
+  min-height: 200px;
+}
+.input-group-button {
+  width: 120px;
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+  background-color: #152d37;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.input-group-button:hover {
+  background-color: #7e8b91;
+  transform: scale(1.1);
+}
+
 .checkInput1 {
   width: 20px;
   height: 20px;
@@ -579,7 +637,7 @@ main {
   gap: 10px;
 }
 
-.rep-creator button {
+.repC-button {
   padding: 10px;
   border-radius: 10px;
   border: none;
@@ -589,7 +647,7 @@ main {
   transition: all 0.3s ease;
 }
 
-.rep-creator button:hover {
+.repC-button:hover {
   background-color: #7e8b91;
   transform: scale(1.1);
 }

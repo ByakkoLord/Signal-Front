@@ -2,12 +2,75 @@ import React, { useEffect, useState, useContext, use } from 'react'
 import { AppContext } from '../../../contexts/ClientContext'
 
 export default function RepCreator() {
+  const fabricantes = ['ControlID', 'Henry','Madis Rodbel', 'Dimep', 'Telemática', 'Kentec', 'Trielo', 'Athos', 'Trix',
+    'Almitec', 'Tecnibra', 'CQS', 'AC-TEC', 'Topdata', 'Blantech',
+    'Zuchi', 'Proveu', 'RW', 'Maxtel', 'Trilobit', 'Biometrus',
+    'IdData', 'Gertec', 'Específico', 'Keypass', 'MHF', 'EVO']
+  const modelos = {
+  'ControlID': [
+    'ID 100',
+    'ID 200',
+    'ID 1000',
+    'ID 5000',
+    'CX 700',
+    'CX 4000',
+    'IDX BIO',
+    'IDX CARD',
+    'IDX MULT',
+    'REP iDClass',
+    'iDAccess',
+    'Catraca iDBlock',
+    'iDBox',
+    'REP iDClass 671',
+    'Rep 2000',
+    'Rep 3000',
+    'Rep 4000'
+  ],
+  'Henry': [
+    'Henry Super-Fácil',
+    'Henry Card I',
+    'Henry Card II',
+    'Henry Card III',
+    'Henry Catraca',
+    'Henry Catraca PC',
+    'Henry Acesso',
+    'Henry Bio-Fácil',
+    'Henry Bio-Fácil Catraca',
+    'Henry Catraca-Ct.Giro',
+    'Henry REP - Orion',
+    'Henry REP - Prisma',
+    'Henry Primme Ponto',
+    'Henry Primme Acesso',
+    'Henry Argos',
+    'Henry REP - Prisma Super Fácil',
+    'Henry REP - Primme Super Fácil',
+    'Henry Primme Acesso Super Fácil',
+    'Henry Hexa',
+    'Henry Primme SF Acesso Refeitório',
+    'Henry Catraca 8x',
+    'Henry Prisma Super Fácil Advanced',
+    'Henry REP 8x - Portaria 671',
+    'Henry Face',
+    'Henry 1000',
+    'Henry 2000',
+    'Henry 3000'
+  ]
+}
+
+
+  const [fabricante, setFabricante] = useState('Fabricante')
+  const [modelo, setModelo] = useState('Modelo')
+
+
+
   const { setCreatorState, socket } = useContext(AppContext)
   const [zstatus, setZstatus] = useState(null)
   const [repExists, setRepExists] = useState(false)
   const [unlocked, setUnlocked] = useState(false)
   const [unlocked1, setUnlocked1] = useState(false)
   const [unlocked2, setUnlocked2] = useState(false)
+  const [showItens1, setShowItens1] = useState(false)
+  const [showItens2, setShowItens2] = useState(false)
   const [newRep, setNewRep] = useState({
     serialNumber: '',
     equipmentModel: '',
@@ -116,38 +179,50 @@ export default function RepCreator() {
             type="text"
             placeholder="Número de série"
           />
-
-          {unlocked && (
-            <>
-              <input
-                value={newRep.equipmentModel}
-                onChange={(e) => setNewRep({ ...newRep, equipmentModel: e.target.value })}
-                type="text"
-                className="input1"
-                placeholder="Modelo do equipamento"
-              />
-              <input
-                value={newRep.manufacturer}
-                onChange={(e) => setNewRep({ ...newRep, manufacturer: e.target.value })}
-                type="text"
-                className="input1"
-                placeholder="Fabricante"
-              />
-              <input
+          <input
                 value={newRep.clientName}
                 onChange={(e) => setNewRep({ ...newRep, clientName: e.target.value })}
                 type="text"
                 className="input1"
                 placeholder="Nome do cliente"
               />
+          {unlocked && (
+            <>
+              <div style={{ display: 'flex', flexDirection: 'row', gap: '30px', marginBottom: '10px' }}>
+                <div onClick={() => setShowItens1(!showItens1)} className='input-group' >
+                <h4>{fabricante}</h4>
+                {showItens1 && (
+                  <div className='input-group-list'>
+                    {fabricantes.map((fabricante, index) => (
+                      <button key={index} type='button' className='input-group-button' onClick={() => {setShowItens1(true); setFabricante(fabricante); newRep.manufacturer = fabricante;}}>
+                      {fabricante}
+                    </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div onClick={() => setShowItens2(!showItens2)} className='input-group' >
+                <h4>{modelo}</h4>
+                {showItens2 && (
+                  <div className='input-group-list'>
+                    {(modelos[fabricante] || []).map((modelo, index) => (
+                      <button key={index} type='button' className='input-group-button' onClick={() => {setShowItens2(true); setModelo(modelo); newRep.equipmentModel = modelo;}}>
+                        {modelo}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              </div>
+              
             </>
           )}
 
           <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-            <button type="button" onClick={() => setCreatorState(false)}>
+            <button className='repC-button' type="button" onClick={() => setCreatorState(false)}>
               Cancelar
             </button>
-            <button type="button" onClick={() => setUnlocked1(true)}>
+            <button className='repC-button' type="button" onClick={() => setUnlocked1(true)}>
               Continuar
             </button>
           </div>
@@ -283,13 +358,14 @@ export default function RepCreator() {
                 gap: '20px'
               }}
             >
-              <button type="button" onClick={() => setUnlocked1(false)}>
+              <button className='repC-button' type="button" onClick={() => setUnlocked1(false)}>
                 Voltar
               </button>
-              <button onClick={() => setUnlocked2(true)} type="button">
+              <button className='repC-button' onClick={() => setUnlocked2(true)} type="button">
                 Iniciar Testes
               </button>
               <button
+                className='repC-button'
                 onClick={() => {
                   setZstatus('waitingDelivery')
                   console.log(zstatus)
@@ -450,10 +526,11 @@ export default function RepCreator() {
                 gap: '20px'
               }}
             >
-              <button style={{ width: '100px' }} type="button" onClick={() => setUnlocked2(false)}>
+              <button className='repC-button' style={{ width: '100px' }} type="button" onClick={() => setUnlocked2(false)}>
                 Voltar
               </button>
               <button
+                className='repC-button'
                 style={{ width: '100px' }}
                 onClick={() => {
                   sendRep()
