@@ -5,6 +5,7 @@ import TitleBar from './components/TitleBar'
 import LoginForm from './components/LoginForm'
 import FinishedTasks from './components/FinishedTasks'
 import RepScreen from './components/RepScreen'
+import DbScreen from './components/DbScreen'
 import { useAppContext } from '../contexts/ClientContext'
 
 import React, { useState, useEffect } from 'react'
@@ -40,6 +41,7 @@ function App() {
               {sidebarSelected === 1 && <Dashboard />}
               {sidebarSelected === 2 && <FinishedTasks />}
               {sidebarSelected === 3 && <RepScreen />}
+              {sidebarSelected === 4 && <DbScreen />}
 
               <div style={{ width: '100%', display: 'flex', justifyContent: 'center', position: 'absolute', bottom: 0, transform: 'translateX(-4%)' }}>
                 <p>
