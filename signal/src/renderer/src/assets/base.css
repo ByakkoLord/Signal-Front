@@ -716,3 +716,18 @@ main {
   border-radius: 5px;
   z-index: 1000;
 }
+
+.db-itens {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  min-width: 200px;
+  max-width: 400px;
+  height: 200px;
+  padding: 20px;
+  background: linear-gradient(to right, #354B53, #5A6B73);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
