@@ -1,5 +1,7 @@
 import React, { useContext } from 'react'
 import downloadIcon from '../../assets/database/download.png'
+import dbImg from '../../assets/database/database.png'
+import delImg from '../../assets/delete.png'
 import { useAppContext } from '../../../contexts/ClientContext'
 
 export default function DbItens() {
@@ -7,16 +9,17 @@ export default function DbItens() {
 
   return (
     <div className="db-itens">
-      <div style={{ gap: '5px', display: 'flex', flexDirection: 'column', justifyItems: 'center', alignItems: 'center' }}>
-        <h4>Cliente: Texas Carnes</h4>
-        <h4>Serviço: Flex Junior 4</h4>
+      <img src={dbImg} width={30} alt="Database" style={{position: 'relative', top: -65, left: -20}} />
+      <div style={{ gap: '5px', display: 'flex', flexDirection: 'column', justifyItems: 'center', alignItems: 'center', marginLeft: '-50px' }}>
+        <h3>Cliente: Texas Carnes</h3>
+        <h3>Serviço: Flex Junior 4</h3>
         <div style={{ display: 'flex', gap: '10px', flexDirection: 'row', marginTop: '20px' }}>
           <h4
             style={{
-              fontSize: '12px',
+              fontSize: '14px',
               backgroundColor: '#354B53',
               borderRadius: '5px',
-              padding: '5px',
+              padding: '10px',
               textAlign: 'center'
             }}
           >
@@ -24,10 +27,10 @@ export default function DbItens() {
           </h4>
           <h4
             style={{
-              fontSize: '12px',
+              fontSize: '14px',
               backgroundColor: '#354B53',
               borderRadius: '5px',
-              padding: '5px',
+              padding: '10px',
               textAlign: 'center'
             }}
           >
@@ -39,34 +42,16 @@ export default function DbItens() {
       <div style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
         <button
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#354B53',
-            cursor: 'pointer',
-            width: 65,
-            height: 65,
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px'
+            
           }}
         >
-          <img src={downloadIcon} alt="Download" width={40} style={{ marginLeft: '5px' }} />
+          <img src={downloadIcon} alt="Download" width={40} style={{ marginLeft: '8px' }} />
         </button>
         <button
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#354B53',
-            cursor: 'pointer',
-            width: 65,
-            height: 65,
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px'
-          }}
-        ></button>
+          
+        >
+          <img src={delImg} alt="Delete" width={40}  />
+        </button>
       </div>
     </div>
   )
