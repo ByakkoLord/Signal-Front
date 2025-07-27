@@ -7,7 +7,7 @@ import waitingDelivery from '../../assets/repsImages/waiting-delivery.png'
 import waitingDelivery2 from '../../assets/repsImages/waiting-delivery2.png'
 import addBox from '../../assets/repsImages/addBox.png'
 import nfeIcon from '../../assets/repsImages/history.png'
-import bill from '../../assets/repsImages/bill.png'
+import deleteIcon from '../../assets/repsImages/delete.png'
 import menuIcon from '../../assets/repsImages/menu.png'
 import NFEScreen from './NFScreen'
 import { AppContext } from '../../../contexts/ClientContext'
@@ -262,6 +262,9 @@ export default function Reps({
                 alignItems: 'center',
                 justifyContent: 'center'
               }}
+              onClick={() => {
+                setShowMenu(!showMenu)
+              }}
             >
               <img width={40} height={40} src={menuIcon} alt="" />
             </button>
@@ -281,7 +284,7 @@ export default function Reps({
                 justifyContent: 'center'
               }}
             >
-              <img width={40} height={40} src={menuIcon} alt="" />
+              <img width={40} height={40} src={tool} alt="" />
             </button>
             <button
               className="rep-button"
@@ -297,7 +300,7 @@ export default function Reps({
                 justifyContent: 'center'
               }}
             >
-              <img width={40} height={40} src={menuIcon} alt="" />
+              <img width={40} height={40} src={deleteIcon} alt="" />
             </button>
                 </div>
               )}

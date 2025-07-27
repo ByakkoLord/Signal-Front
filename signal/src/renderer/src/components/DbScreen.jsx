@@ -1,13 +1,26 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useAppContext } from '../../contexts/ClientContext'
 import DbItens from './dbscreen/DbItens'
 import Search from '../components/repscreen/Search'
 import axios from 'axios'
 
 export default function DbScreen() {
-  const { sidebarSelected, setSidebarSelected } = useAppContext()
+  const { sidebarSelected, setSidebarSelected, socket } = useAppContext()
   const [fileInput, setFileInput] = useState(null)
+  const [dbs, setDbs] = useState([])
 
+  useEffect(() => {
+    if (!socket) return;
+
+  console.log("DbScreen montado, pedindo dados...");
+    socket.emit("requestDbs");
+    socket.on("dbsD", (data) => {
+      console.log("DBs Data:", data);
+      setDbs(data);
+
+    });
+  }, [socket])
+  
   const createDb = async () => {
     const formData = new FormData();
     formData.append('db', fileInput.files[0]);
@@ -33,7 +46,9 @@ export default function DbScreen() {
                 <button type='button' onClick={createDb}>Create Database</button>
                 <input onChange={(e) => setFileInput(e.target)} type="file" name="db" id="db" />
                 <div className='db-itens-container'>
-                  <DbItens />
+                  {dbs.map((db, index) => (
+                    <DbItens key={index} db={db} />
+                  ))}
                 </div>
     </div>
   )
