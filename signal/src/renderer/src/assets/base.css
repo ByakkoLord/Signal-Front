@@ -777,3 +777,35 @@ main {
   background-color: #7e8b91;
   transform: scale(1.1);
 }
+
+.nfe-input {
+  width: 300px;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  border: none;
+  background-color: #291818;
+  outline: none;
+  color: white;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  position: relative;
+  margin-bottom: -85px;
+  margin-right: -200px;
+  
+  height: 75px;
+  top: -82px;
+  right: 220px;
+  background-color: #1e4654;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.1);
+}

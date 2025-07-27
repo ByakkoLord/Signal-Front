@@ -8,7 +8,7 @@ import waitingDelivery2 from '../../assets/repsImages/waiting-delivery2.png'
 import addBox from '../../assets/repsImages/addBox.png'
 import nfeIcon from '../../assets/repsImages/history.png'
 import bill from '../../assets/repsImages/bill.png'
-import historyIcon from '../../assets/history.png'
+import menuIcon from '../../assets/repsImages/menu.png'
 import NFEScreen from './NFScreen'
 import { AppContext } from '../../../contexts/ClientContext'
 
@@ -23,11 +23,14 @@ export default function Reps({
   itensArray,
   ficha_tecnica,
   obs
+, onShowNFE
+
 }) {
   const [statusImage, setStatusImage] = useState(null)
   const [statusText, setStatusText] = useState('')
-  const { nfeVisible, setNfeVisible, socket } = useContext(AppContext)
+  const { setNfeVisible, socket } = useContext(AppContext)
   const [hisValue, setHisValue] = useState(null)
+  const [showMenu, setShowMenu] = useState(false)
 
   const ideal = Object.values(ficha_tecnica).every((v) => v === false)
 
@@ -242,7 +245,7 @@ export default function Reps({
                 alignItems: 'center',
                 justifyContent: 'center'
               }}
-              onClick={() => setNfeVisible(true)}
+              onClick={() => [setNfeVisible(true), onShowNFE()]}
             >
               <img width={40} height={40} src={nfeIcon} alt="" />
             </button>
@@ -260,8 +263,44 @@ export default function Reps({
                 justifyContent: 'center'
               }}
             >
-              <img width={40} height={40} src={historyIcon} alt="" />
+              <img width={40} height={40} src={menuIcon} alt="" />
             </button>
+            {showMenu && (
+                <div className='menu'>
+                  <button
+              className="rep-button"
+              style={{
+                width: 60,
+                height: 60,
+                borderRadius: 10,
+                backgroundColor: '#2d6c83ff',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <img width={40} height={40} src={menuIcon} alt="" />
+            </button>
+            <button
+              className="rep-button"
+              style={{
+                width: 60,
+                height: 60,
+                borderRadius: 10,
+                backgroundColor: '#2d6c83ff',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <img width={40} height={40} src={menuIcon} alt="" />
+            </button>
+                </div>
+              )}
             <div
               style={{
                 width: 70,
@@ -274,17 +313,17 @@ export default function Reps({
                 alignItems: 'center',
                 justifyContent: 'center'
               }}
+              
             >
-              <h1>{hisValue}</h1>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <h1>{hisValue}</h1>
+                </div>
             </div>
           </div>
         </div>
       </div>
-              {nfeVisible && (
-                <>
-                  <NFEScreen serialNumber={serialNumber} />
-                </>
-              )}
+             
     </div>
   )
 }
