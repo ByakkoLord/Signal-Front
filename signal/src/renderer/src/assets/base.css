@@ -865,6 +865,7 @@ main {
   background-color: #234657;
   color: white;
   transition: all 0.3s ease;
+  z-index: 1000;
 }
 
 .add-db-button:hover {

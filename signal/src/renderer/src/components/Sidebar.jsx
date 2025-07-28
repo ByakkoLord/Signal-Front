@@ -3,6 +3,7 @@ import dashboard from '../assets/dashboard white.png'
 import rep from '../assets/rep.png'
 import history from '../assets/history.png'
 import dbImg from '../assets/database/database.png'
+import manual from '../assets/manual.png'
 import classNames from 'classnames'
 import { useAppContext } from '../../contexts/ClientContext'
 
@@ -62,6 +63,19 @@ export default function Sidebar() {
         }}
       >
         <img width={30} src={dbImg} alt="" style={{ userSelect: 'none' }} />
+      </div>
+      <div
+        onClick={() => setSidebarSelected(4)}
+        className={classNames('sidebar-item', { 'sidebar-item-selected': sidebarSelected === 5 })}
+        style={{
+          width: '100%',
+          height: 60,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        <img width={30} src={manual} alt="" style={{ userSelect: 'none' }} />
       </div>
     </div>
   )
