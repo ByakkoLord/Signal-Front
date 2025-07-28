@@ -17,7 +17,7 @@ export default function DbCreator() {
     formData.append('db_size', fileInput.files[0].size)
 
     try {
-      const response = await axios.post('http://localhost:3000/upload-db', formData, {
+      const response = await axios.post('http://192.168.0.251:3000/upload-db', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
