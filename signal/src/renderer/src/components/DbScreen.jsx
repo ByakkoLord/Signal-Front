@@ -2,9 +2,10 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useAppContext } from '../../contexts/ClientContext'
 import DbItens from './dbscreen/DbItens'
 import NfeCreator from './dbscreen/DbCreator'
+import Message from './messages/Message'
 
 export default function DbScreen() {
-  const { sidebarSelected, setSidebarSelected, socket, showDbCreator, setShowDbCreator } = useAppContext()
+  const { sidebarSelected, setSidebarSelected, socket, showDbCreator, setShowDbCreator, showMessage, setShowMessage, showPercentage, setShowPercentage } = useAppContext()
   const [dbs, setDbs] = useState([])
 
   useEffect(() => {
@@ -24,6 +25,7 @@ export default function DbScreen() {
   return (
     <div className="db-screen">
       {showDbCreator && <NfeCreator />}
+      {showMessage && <Message message={`Enviando Banco de Dados: ${showPercentage}%`} percentage={showPercentage} />}
       
                   <div className='db-itens-container'>
                   {dbs.map((db, index) => (

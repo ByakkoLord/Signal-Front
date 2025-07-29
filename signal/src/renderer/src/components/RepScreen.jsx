@@ -8,7 +8,7 @@ import NFEScreen from './repscreen/NFScreen'
 export default function Dashboard() {
   const { creatorState, socket, searchTerm, nfeVisible } = useContext(AppContext)
   const [reps, setReps] = useState([])
-  const [selectedSerial, setSelectedSerial] = useState(null) // controla qual REP foi clicado para NFE
+  const [selectedSerial, setSelectedSerial] = useState(null)
 
   useEffect(() => {
     console.log('Dashboard mounted')
@@ -54,7 +54,6 @@ export default function Dashboard() {
 
       {creatorState && <RepCreator />}
 
-      {/* Exibe apenas UM NFEScreen para o REP selecionado */}
       {selectedSerial && nfeVisible === true && (
         <NFEScreen
           serialNumber={selectedSerial}

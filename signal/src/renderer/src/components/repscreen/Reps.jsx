@@ -1,4 +1,5 @@
 import repIdClass from '../../assets/repsImages/rep1.jpg'
+import henryPrisma from '../../assets/repsImages/henryPrisma.webp'
 import checkmark from '../../assets/repsImages/check-mark.png'
 import Xmark from '../../assets/repsImages/x-mark.png'
 import checkMarkgreen from '../../assets/repsImages/check-mark-green.png'
@@ -9,7 +10,10 @@ import addBox from '../../assets/repsImages/addBox.png'
 import nfeIcon from '../../assets/repsImages/history.png'
 import deleteIcon from '../../assets/repsImages/delete.png'
 import menuIcon from '../../assets/repsImages/menu.png'
+import comment from '../../assets/repsImages/comment.png'
 import NFEScreen from './NFScreen'
+import RepUpdater from './RepUpdater'
+import TextGenerator from './TextGenerator'
 import { AppContext } from '../../../contexts/ClientContext'
 
 import React, { useEffect, useState, useContext } from 'react'
@@ -31,6 +35,28 @@ export default function Reps({
   const { setNfeVisible, socket } = useContext(AppContext)
   const [hisValue, setHisValue] = useState(null)
   const [showMenu, setShowMenu] = useState(false)
+  const [repImage, setRepImage] = useState(null)
+  const [showUpdater, setShowUpdater] = useState(false)
+  const [showGenerator, setShowGenerator] = useState(false)
+
+
+  useEffect(() => {
+    console.log('Reps component mounted with serial number:', serialNumber)
+    console.log('Model:', model)
+    switch (model) {
+      case 'REP iDClass 671':
+        setRepImage(repIdClass)
+        break
+         case 'REP iDClass':
+        setRepImage(repIdClass)
+        break
+      case 'Henry Super-Fácil':
+        setRepImage(henryPrisma)
+        break
+      default:
+        setRepImage(repIdClass)
+    }
+  }, [model])
 
   const ideal = Object.values(ficha_tecnica).every((v) => v === false)
 
@@ -45,7 +71,7 @@ export default function Reps({
     switch (status) {
       case 'waitingDelivery':
         setStatusImage(waitingDelivery)
-        setStatusText('Aguardando Análise')
+        setStatusText('Aguardando Administração')
         break
       case 'waitingDelivery2':
         setStatusImage(waitingDelivery2)
@@ -57,7 +83,7 @@ export default function Reps({
         break
       case 'tool':
         setStatusImage(tool)
-        setStatusText('Em Manutenção')
+        setStatusText('Aguardando Manutenção')
         break
       case 'xmark':
         setStatusImage(Xmark)
@@ -81,7 +107,7 @@ export default function Reps({
             boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
           }}
           width={230}
-          src={repIdClass}
+          src={repImage}
           alt="REP"
         />
         <div>
@@ -272,6 +298,9 @@ export default function Reps({
                 <div className='menu'>
                   <button
               className="rep-button"
+              onClick={() => {
+                showUpdater ? setShowUpdater(false) : setShowUpdater(true)
+              }}
               style={{
                 width: 60,
                 height: 60,
@@ -285,6 +314,25 @@ export default function Reps({
               }}
             >
               <img width={40} height={40} src={tool} alt="" />
+            </button>
+            <button
+              className="rep-button"
+              style={{
+                width: 60,
+                height: 60,
+                borderRadius: 10,
+                backgroundColor: '#2d6c83ff',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              onClick={() => {
+                showGenerator ? setShowGenerator(false) : setShowGenerator(true)
+              }}
+            >
+              <img width={40} height={40} src={comment} alt="" />
             </button>
             <button
               className="rep-button"
@@ -326,7 +374,12 @@ export default function Reps({
           </div>
         </div>
       </div>
-             
+      {showUpdater && (
+        <RepUpdater serialNumber={serialNumber} />
+      )}
+      {showGenerator && (
+        <TextGenerator serialNumber={serialNumber} client={client} itensArray={itensArray} />
+      )}
     </div>
   )
 }

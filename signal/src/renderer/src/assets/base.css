@@ -714,7 +714,7 @@ main {
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
-  z-index: 1000;
+  z-index: 99999;
 }
 
 .db-screen{
@@ -803,7 +803,7 @@ main {
   
   height: 75px;
   top: -82px;
-  right: 220px;
+  right: 260px;
   background-color: #1e4654;
   padding: 10px;
   border-radius: 10px;

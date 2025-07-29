@@ -21,6 +21,10 @@ export function AppProvider({ children }) {
   const [searchTerm, setSearchTerm] = useState('')
   const [nfeVisible, setNfeVisible] = useState(false)
   const [showDbCreator, setShowDbCreator] = useState(false)
+  const [showMessage, setShowMessage] = useState(false)
+  const [showPercentage, setShowPercentage] = useState(0)
+  const [showUpdater, setShowUpdater] = useState(false)
+  const [showGenerator, setShowGenerator] = useState(false)
 
   const socket = useMemo(() => {
     const newSocket = io(import.meta.env.VITE_SERVER_URL, {
@@ -78,7 +82,15 @@ export function AppProvider({ children }) {
         nfeVisible,
         setNfeVisible,
         showDbCreator,
-        setShowDbCreator
+        setShowDbCreator,
+        showMessage,
+        setShowMessage,
+        showPercentage,
+        setShowPercentage,
+        showUpdater,
+        setShowUpdater,
+        showGenerator,
+        setShowGenerator
       }}
     >
       {children}

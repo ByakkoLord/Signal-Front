@@ -22,9 +22,7 @@ export default function RepCreator() {
     'Catraca iDBlock',
     'iDBox',
     'REP iDClass 671',
-    'Rep 2000',
-    'Rep 3000',
-    'Rep 4000'
+    'REP Facial'
   ],
   'Henry': [
     'Henry Super-Fácil',
@@ -121,10 +119,31 @@ export default function RepCreator() {
         console.log('Serial number is available')
         setUnlocked(true)
       }
+
+      
     })
   }
 
-  const sendRep = () => {
+  const verifyManufacturer = () => {
+    switch (true) {
+      case fabricante.includes("ControlID"):
+        console.log('Setting default serial number for ControlID')
+        setNewRep({
+          ...newRep,
+          serialNumber: "00014003750",
+        })
+        break;
+      case fabricante.includes("Henry"):
+        console.log('Setting default serial number for Henry')
+        setNewRep({
+          ...newRep,
+          serialNumber: "00004003750",
+        })
+        break;
+    }
+  }
+
+  const sendRep = (novoStatus) => {
     socket.emit('verifyHistory', { serialNumber: newRep.serialNumber })
 
     socket.once('historyValue', (response) => {
@@ -141,8 +160,6 @@ export default function RepCreator() {
           createdAt: new Date()
         }
 
-        const novoStatus = 'waitingDelivery'
-
         const repAtualizado = { ...newRep, history: novoHistory, status: novoStatus }
 
         socket.emit('sendRep', { newRep: repAtualizado })
@@ -158,6 +175,10 @@ export default function RepCreator() {
   useEffect(() => {
     verifySerial()
   }, [newRep.serialNumber])
+
+  useEffect(() => {
+    verifyManufacturer()
+  },[fabricante])
 
   useEffect(() => {}, [newRep])
 
@@ -370,7 +391,7 @@ export default function RepCreator() {
                   setZstatus('waitingDelivery')
                   console.log(zstatus)
                   setTimeout(() => {
-                    sendRep()
+                    sendRep('tool')
                   }, 1000)
                   setCreatorState(false)
                 }}
@@ -533,7 +554,7 @@ export default function RepCreator() {
                 className='repC-button'
                 style={{ width: '100px' }}
                 onClick={() => {
-                  sendRep()
+                  sendRep('waitingDelivery')
                   setCreatorState(false)
                 }}
                 type="button"
